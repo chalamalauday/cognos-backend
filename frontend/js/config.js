@@ -1,19 +1,20 @@
 // Central API Configuration for COGNOS 2K26
-// If frontend and backend are hosted together (e.g. inside /innovex2026/), 
-// this automatically determines the correct backend path without hardcoding.
-// If using a custom external backend URL, set window.COGNOS_API_BASE_URL before this script runs.
+const RENDER_BACKEND_URL = "https://cognos-backend.onrender.com";
+
 (function() {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
     if (!window.COGNOS_API_BASE_URL) {
-        const path = window.location.pathname;
-        if (path.includes('/frontend')) {
-            // E.g. /innovex2026/frontend/index.html -> /innovex2026/backend
-            window.COGNOS_API_BASE_URL = path.substring(0, path.lastIndexOf('/frontend')) + '/backend';
-        } else if (path.includes('/TECH_FEST')) {
-            window.COGNOS_API_BASE_URL = '/TECH_FEST/backend';
+        if (isLocal) {
+            // Local preview on XAMPP
+            const path = window.location.pathname;
+            window.COGNOS_API_BASE_URL = path.includes('/TECH_FEST') ? '/TECH_FEST/backend' : '../backend';
         } else {
-            window.COGNOS_API_BASE_URL = '../backend';
+            // Live college frontend (rvrjcce.ac.in) -> Send registration requests to Render backend
+            window.COGNOS_API_BASE_URL = `${RENDER_BACKEND_URL}/backend`;
         }
     }
+
     if (!window.COGNOS_API_URL) {
         window.COGNOS_API_URL = window.COGNOS_API_BASE_URL + '/register.php';
     }

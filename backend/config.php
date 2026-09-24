@@ -13,12 +13,13 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
     ini_set('display_errors', '0');
 
     // --------------------------------------------------------------------------
-    // 1. Database Configuration (Default XAMPP credentials)
+    // 1. Database Configuration (Supports Render Environment Variables with TiDB Cloud)
     // --------------------------------------------------------------------------
-    define('DB_HOST', 'sql312.infinityfree.com');
-    define('DB_NAME', 'if0_42997910_cognos');
-    define('DB_USER', 'if0_42997910');
-    define('DB_PASS', 'cognos2026');
+    define('DB_HOST', getenv('DB_HOST') ?: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com');
+    define('DB_PORT', getenv('DB_PORT') ?: '4000');
+    define('DB_NAME', getenv('DB_NAME') ?: 'cognos_2k26');
+    define('DB_USER', getenv('DB_USER') ?: '3BuQVnU4HMDDSUm.root');
+    define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : 'MN7h48nJBBriH95D');
     define('DB_CHARSET', 'utf8mb4');
 
     // --------------------------------------------------------------------------
