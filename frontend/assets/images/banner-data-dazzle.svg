@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="600" height="240">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1b2e"/>
+      <stop offset="50%" stop-color="#0d233a"/>
+      <stop offset="100%" stop-color="#08101e"/>
+    </linearGradient>
+    <linearGradient id="pinkGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF52AF"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="shadow3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="240" rx="16" fill="url(#bgGrad3)"/>
+
+  <!-- Badge #03 -->
+  <rect x="530" y="16" width="50" height="26" rx="13" fill="#090d16" stroke="#334155" stroke-width="1"/>
+  <text x="555" y="34" fill="#B0C4DE" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" text-anchor="middle">#03</text>
+
+  <!-- Illustration: Lightbulb Idea, Magnifying Glass & Analytics Chart -->
+  <g transform="translate(255, 16)" filter="url(#shadow3)">
+    <!-- Lightbulb -->
+    <path d="M25 15 C15 15 10 24 10 32 C10 38 15 42 18 46 L20 52 L30 52 L32 46 C35 42 40 38 40 32 C40 24 35 15 25 15 Z" fill="#FBBF24"/>
+    <rect x="20" y="53" width="10" height="4" rx="1" fill="#cbd5e1"/>
+    <!-- Glow rays -->
+    <line x1="25" y1="6" x2="25" y2="10" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="12" y1="12" x2="15" y2="15" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+    <line x1="38" y1="12" x2="35" y2="15" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Bar Chart Icons -->
+    <rect x="55" y="24" width="5" height="24" rx="1.5" fill="#38BDF8"/>
+    <rect x="63" y="16" width="5" height="32" rx="1.5" fill="#4169E1"/>
+    <rect x="71" y="8" width="5" height="40" rx="1.5" fill="#FF52AF"/>
+
+    <!-- Magnifying Glass -->
+    <circle cx="48" cy="38" r="11" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+    <line x1="56" y1="46" x2="66" y2="56" stroke="#e2e8f0" stroke-width="3.5" stroke-linecap="round"/>
+    
+    <!-- Mini Card -->
+    <rect x="58" y="42" width="22" height="14" rx="2" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <line x1="61" y1="46" x2="72" y2="46" stroke="#38bdf8" stroke-width="1.5"/>
+    <line x1="61" y1="50" x2="68" y2="50" stroke="#94a3b8" stroke-width="1"/>
+  </g>
+
+  <!-- Title: DataDazzle -->
+  <g transform="translate(300, 155)" text-anchor="middle">
+    <!-- Big Stylized Pink D -->
+    <text x="-135" y="0" fill="url(#pinkGradD)" font-family="'Georgia', serif" font-size="58" font-weight="900" filter="url(#shadow3)">D</text>
+    <!-- Rest of name -->
+    <text x="-90" y="-8" fill="url(#goldGrad)" font-family="'Plus Jakarta Sans', sans-serif" font-size="42" font-weight="800" text-anchor="start" letter-spacing="1">ataDazzle</text>
+    <!-- Tagline -->
+    <text x="0" y="32" fill="#4ade80" font-family="'Georgia', serif" font-size="15" font-style="italic" letter-spacing="0.5">Data insights &amp; Visual story telling</text>
+  </g>
+</svg>

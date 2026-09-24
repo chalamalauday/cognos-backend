@@ -1,0 +1,17 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg5)"/>
+  <circle cx="230" cy="170" r="30" fill="#38bdf8"/>
+  <circle cx="300" cy="150" r="38" fill="#00f2fe"/>
+  <circle cx="370" cy="170" r="30" fill="#818cf8"/>
+  <path d="M190 250 C190 215 270 215 270 250" fill="#1e293b"/>
+  <path d="M250 250 C250 200 350 200 350 250" fill="#0f172a"/>
+  <path d="M330 250 C330 215 410 215 410 250" fill="#1e293b"/>
+  <text x="300" y="320" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="22" font-weight="700">Team Cognos Spirit</text>
+  <text x="300" y="350" text-anchor="middle" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="500">Over 500+ Participants from Top Colleges</text>
+</svg>

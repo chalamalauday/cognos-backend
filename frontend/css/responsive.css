@@ -1,0 +1,602 @@
+/* ==========================================================
+   COGNOS 2K26 - Comprehensive Responsive Stylesheet
+   Ensures seamless responsiveness across Mobile, Tablet, and Desktop
+   ========================================================== */
+
+/* Universal Responsive Fixes & Box Model */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ----------------------------------------------------------
+   1. LAPTOPS & TABLETS (max-width: 1024px)
+   ---------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .hero-title {
+        font-size: 64px;
+    }
+
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .hero-meta-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .gallery-photo-card {
+        flex: 0 0 300px;
+        height: 210px;
+    }
+}
+
+/* ----------------------------------------------------------
+   2. TABLETS & SMALL DESKTOPS (max-width: 992px)
+   ---------------------------------------------------------- */
+@media (max-width: 992px) {
+    .hero-meta-cards {
+        grid-template-columns: 1fr;
+        max-width: 540px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .coordinators-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+/* ----------------------------------------------------------
+   3. MOBILE & SMALL TABLETS (max-width: 768px)
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+    /* Header & Navigation */
+    .top-header-banner {
+        padding: 8px 12px;
+    }
+
+    .college-header-logo {
+        max-height: 54px;
+    }
+
+    .main-navbar .nav-container {
+        position: relative;
+        min-height: 48px;
+    }
+
+    .mobile-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 6px;
+        padding: 8px 10px;
+        color: #ffffff;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    .mobile-toggle:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(180deg, #123a8c 0%, #0c2760 100%);
+        flex-direction: column;
+        padding: 16px 20px 22px;
+        gap: 6px;
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+        z-index: 1500;
+        border-bottom: 2px solid #38bdf8;
+    }
+
+    .nav-links.show,
+    .nav-links.active {
+        display: flex !important;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+        padding: 11px 16px;
+        border-radius: 6px;
+        font-size: 15px;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .btn-nav-register {
+        display: block;
+        width: 100%;
+        margin: 10px 0 0 0;
+        padding: 12px;
+        font-size: 15px;
+        text-align: center;
+        background: #ffffff;
+        color: var(--header-blue) !important;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 36px 0 44px 0;
+    }
+
+    .hero-department-block {
+        gap: 3px;
+        padding: 0 8px;
+    }
+
+    .organizer-kicker {
+        font-size: 14px;
+    }
+
+    .department-label {
+        font-size: 16px;
+    }
+
+    .department-name {
+        font-size: 16px;
+        line-height: 1.35;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .department-connector {
+        font-size: 14px;
+    }
+
+    .hero-title {
+        font-size: 48px;
+        margin: 14px 0 8px 0;
+    }
+
+    .hero-tagline {
+        font-size: 20px;
+        margin-bottom: 22px;
+    }
+
+    .hero-meta-card {
+        padding: 14px 16px;
+        border-radius: 10px;
+    }
+
+    .countdown-grid {
+        gap: 8px;
+        max-width: 360px;
+    }
+
+    .countdown-box {
+        padding: 10px 4px;
+        border-radius: 8px;
+    }
+
+    .countdown-num {
+        font-size: 26px;
+    }
+
+    .countdown-label {
+        font-size: 11px;
+    }
+
+    .hero-cta-group {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 320px;
+        margin: 26px auto 32px auto;
+        gap: 12px;
+    }
+
+    .btn-primary-action,
+    .btn-secondary-action {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 13px 20px;
+        font-size: 16px;
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+        flex-direction: column;
+        gap: 14px;
+        padding: 20px 16px;
+        margin: 28px auto 0 auto;
+        text-align: center;
+    }
+
+    .stat-col {
+        padding: 4px 0;
+    }
+
+    .stat-num {
+        font-size: 28px;
+    }
+
+    .stat-lbl {
+        font-size: 13px;
+    }
+
+    /* Events Section */
+    .events-section {
+        padding: 46px 0;
+    }
+
+    .section-title {
+        font-size: 25px;
+    }
+
+    .section-desc {
+        font-size: 14px;
+    }
+
+    .event-card {
+        border-radius: 12px;
+    }
+
+    .event-card-body {
+        padding: 18px 16px;
+    }
+
+    .event-card-title {
+        font-size: 22px;
+    }
+
+    .reg-callout-box {
+        padding: 24px 18px;
+        margin-top: 36px;
+    }
+
+    .callout-inner h3 {
+        font-size: 20px;
+    }
+
+    .callout-inner p {
+        font-size: 14px;
+    }
+
+    .btn-reg-now-large {
+        width: 100%;
+        max-width: 300px;
+        padding: 13px 20px;
+        font-size: 15px;
+        justify-content: center;
+    }
+
+    /* Schedule / Timeline */
+    .schedule-section {
+        padding: 46px 0;
+    }
+
+    .timeline-container {
+        padding-left: 20px;
+        margin-top: 24px;
+    }
+
+    .timeline-spine {
+        left: 4px;
+    }
+
+    .timeline-marker {
+        left: -20px;
+        width: 14px;
+        height: 14px;
+    }
+
+    .timeline-card {
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    .timeline-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .timeline-card-title {
+        font-size: 19px;
+    }
+
+    .timeline-card-sub {
+        font-size: 14px;
+    }
+
+    .timeline-card-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .timeline-meta-point {
+        font-size: 13px;
+    }
+
+    /* Gallery */
+    .gallery-section {
+        padding: 46px 0;
+    }
+
+    .gallery-photo-card {
+        flex: 0 0 250px;
+        height: 175px;
+    }
+
+    /* Coordinators & Hospitality */
+    .coordinators-section {
+        padding: 46px 0;
+    }
+
+    .coord-group-card {
+        padding: 20px 16px;
+    }
+
+    .coord-person {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .hospitality-banner {
+        flex-direction: column;
+        text-align: left;
+        gap: 16px;
+        padding: 20px 16px;
+        margin-top: 26px;
+    }
+
+    .hosp-contact-badge {
+        width: 100%;
+        text-align: left;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 38px 0 20px 0;
+    }
+
+    .footer-top {
+        gap: 24px;
+        padding-bottom: 24px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+    }
+
+    /* Modals Responsive */
+    .modal-overlay {
+        padding: 10px;
+        align-items: center;
+    }
+
+    .modal-container {
+        max-height: 92vh;
+        border-radius: 12px;
+        width: 100%;
+    }
+
+    .modal-header {
+        padding: 14px 16px;
+    }
+
+    .modal-title {
+        font-size: 19px;
+    }
+
+    .modal-badge {
+        font-size: 11px;
+    }
+
+    .modal-body {
+        padding: 16px 14px;
+    }
+
+    /* CRITICAL: Stack 2-column form grids into 1 column on mobile */
+    .form-grid-2 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        margin-bottom: 12px;
+    }
+
+    .form-group-title {
+        font-size: 14px;
+    }
+
+    .form-label {
+        font-size: 13px;
+    }
+
+    .form-input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .events-select-box {
+        padding: 10px;
+    }
+
+    .event-checkbox-card {
+        padding: 10px;
+    }
+
+    .cb-title {
+        font-size: 14px;
+    }
+
+    .cb-sub {
+        font-size: 12px;
+    }
+
+    .teammate-toggle-wrap {
+        padding: 12px 14px;
+    }
+
+    .toggle-info h4 {
+        font-size: 14px;
+    }
+
+    .toggle-info p {
+        font-size: 12px;
+    }
+
+    .file-upload-zone {
+        padding: 18px 12px;
+    }
+
+    .upload-text {
+        font-size: 13px;
+    }
+
+    .upload-sub {
+        font-size: 11px;
+    }
+
+    .btn-submit-reg {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .event-details-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .success-card {
+        padding: 24px 16px;
+    }
+
+    .success-title {
+        font-size: 22px;
+    }
+
+    .reg-id-number {
+        font-size: 24px;
+        word-break: break-all;
+    }
+
+    .btn-join-whatsapp {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+/* ----------------------------------------------------------
+   4. EXTRA SMALL SCREENS & PHONES (max-width: 480px)
+   ---------------------------------------------------------- */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .college-header-logo {
+        max-height: 44px;
+    }
+
+    .hero-title {
+        font-size: 38px;
+    }
+
+    .hero-tagline {
+        font-size: 17px;
+    }
+
+    .department-name {
+        font-size: 14px;
+    }
+
+    .countdown-grid {
+        gap: 6px;
+        max-width: 320px;
+    }
+
+    .countdown-num {
+        font-size: 22px;
+    }
+
+    .countdown-label {
+        font-size: 10px;
+    }
+
+    .prize-pill-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .prize-tier {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 12px;
+    }
+
+    .tier-label, .tier-amount {
+        font-size: 12px;
+    }
+
+    .gallery-photo-card {
+        flex: 0 0 210px;
+        height: 145px;
+    }
+
+    .modal-overlay {
+        padding: 6px;
+    }
+
+    .modal-header {
+        padding: 12px 14px;
+    }
+
+    .modal-title {
+        font-size: 17px;
+    }
+
+    .modal-close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+
+    .modal-body {
+        padding: 14px 10px;
+    }
+}

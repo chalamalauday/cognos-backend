@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="600" height="240">
+  <defs>
+    <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#182236"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF52AF"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+    <filter id="shadow1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="240" rx="16" fill="url(#bgGrad1)"/>
+
+  <!-- Network Connection Mesh in Background -->
+  <g opacity="0.25" stroke="#B0C4DE" stroke-width="1.2">
+    <line x1="60" y1="40" x2="140" y2="80"/>
+    <line x1="140" y1="80" x2="220" y2="50"/>
+    <line x1="140" y1="80" x2="180" y2="150"/>
+    <line x1="220" y1="50" x2="310" y2="90"/>
+    <line x1="380" y1="50" x2="460" y2="80"/>
+    <line x1="460" y1="80" x2="540" y2="40"/>
+    <line x1="460" y1="80" x2="490" y2="160"/>
+    <line x1="50" y1="180" x2="130" y2="160"/>
+    <line x1="480" y1="180" x2="560" y2="190"/>
+  </g>
+  <g fill="#4169E1" opacity="0.4">
+    <circle cx="60" cy="40" r="4"/>
+    <circle cx="140" cy="80" r="5"/>
+    <circle cx="220" cy="50" r="4"/>
+    <circle cx="180" cy="150" r="5"/>
+    <circle cx="380" cy="50" r="4"/>
+    <circle cx="460" cy="80" r="5"/>
+    <circle cx="540" cy="40" r="4"/>
+    <circle cx="490" cy="160" r="4"/>
+  </g>
+
+  <!-- Badge #01 -->
+  <rect x="530" y="16" width="50" height="26" rx="13" fill="#090d16" stroke="#334155" stroke-width="1"/>
+  <text x="555" y="34" fill="#B0C4DE" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" text-anchor="middle">#01</text>
+
+  <!-- Illustration: Two people discussing -->
+  <g transform="translate(245, 16)" filter="url(#shadow1)">
+    <!-- Person 1 (Female) -->
+    <circle cx="35" cy="22" r="10" fill="#fbcfe8"/>
+    <path d="M25 22 Q35 10 45 22 Q40 14 30 15 Z" fill="#4c0519"/>
+    <path d="M24 33 L46 33 L42 68 L28 68 Z" fill="#9333ea"/>
+    <rect x="30" y="44" width="16" height="20" rx="3" fill="#e2e8f0"/>
+    
+    <!-- Person 2 (Male) -->
+    <circle cx="75" cy="22" r="10" fill="#fde68a"/>
+    <path d="M65 19 Q75 11 85 16 L84 21 Z" fill="#1e293b"/>
+    <path d="M63 33 L87 33 L83 68 L67 68 Z" fill="#4169E1"/>
+    
+    <!-- Dialogue Bubbles -->
+    <circle cx="55" cy="14" r="3" fill="#FF52AF" opacity="0.8"/>
+    <circle cx="58" cy="8" r="4.5" fill="#4169E1" opacity="0.8"/>
+  </g>
+
+  <!-- Title: Vishleshana -->
+  <g transform="translate(300, 155)" text-anchor="middle">
+    <!-- Big Stylized Pink V -->
+    <text x="-120" y="0" fill="url(#pinkGrad)" font-family="'Georgia', serif" font-size="58" font-weight="900" filter="url(#shadow1)">V</text>
+    <!-- Rest of name -->
+    <text x="-90" y="-8" fill="#e2e8f0" font-family="'Plus Jakarta Sans', sans-serif" font-size="42" font-weight="800" text-anchor="start" letter-spacing="1">ishleshana</text>
+    <!-- Tagline -->
+    <text x="0" y="32" fill="#B0C4DE" font-family="'Georgia', serif" font-size="16" font-style="italic" letter-spacing="0.5">Engaging with Conversation</text>
+  </g>
+</svg>

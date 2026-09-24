@@ -1,0 +1,13 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#bg6)"/>
+  <rect x="200" y="120" width="200" height="120" rx="8" fill="#040814" stroke="#00f2fe" stroke-width="2"/>
+  <text x="300" y="185" text-anchor="middle" fill="#00f2fe" font-family="monospace" font-size="24" font-weight="800">2K25 &gt; 2K26</text>
+  <text x="300" y="320" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="22" font-weight="700">Keynote &amp; Inauguration</text>
+  <text x="300" y="350" text-anchor="middle" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="500">Decennial Block Grand Auditorium</text>
+</svg>

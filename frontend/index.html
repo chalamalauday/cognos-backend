@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COGNOS 2K26 | National Level Technical Symposium - Department of CSD &amp; AIDS</title>
+    <meta name="description" content="COGNOS 2K26 - National Level Technical Fest organized by Department of CSD &amp; AIDS. Events include Vishleshana, Razzle Review, and Data Dazzle on October 9th.">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="shortcut icon" href="assets/images/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/images/header_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- 1. TOP HEADER BANNER (Full width College Logo Banner) -->
+    <div class="top-header-banner">
+        <div class="container banner-container">
+            <a href="#home" class="college-banner-link" aria-label="RVR &amp; JC College of Engineering">
+                <img src="assets/images/header_logo.png" alt="R.V.R. &amp; J.C. COLLEGE OF ENGINEERING (AUTONOMOUS)" class="college-header-logo">
+            </a>
+        </div>
+    </div>
+
+    <!-- 2. SOLID BLUE NAVIGATION BAR (Sticky below banner) -->
+    <header class="main-navbar" id="mainNavbar">
+        <div class="container nav-container">
+            <div class="nav-left">
+                <a href="#home" class="nav-home-icon" title="COGNOS 2K26 Home">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                </a>
+                <span class="nav-brand-title">COGNOS 2K26</span>
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle navigation" onclick="toggleNav()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#events" class="nav-link">Events</a></li>
+                    <li><a href="#schedule" class="nav-link">Schedule</a></li>
+                    <li><a href="#gallery" class="nav-link">Highlights</a></li>
+                    <li><a href="#coordinators" class="nav-link">Coordinators</a></li>
+                    <li><a href="#hospitality" class="nav-link">Accommodation</a></li>
+                    <li><button class="btn-nav-register pulse-btn" onclick="openRegistrationModal()">Register Now</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 3. HERO SECTION (With Dynamic Animated Title & Spacious Cards) -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-department-block animate-fade-in">
+                <span class="organizer-kicker">Organised by</span>
+                <span class="department-label">Departments of</span>
+                <span class="department-name">Computer Science and Engineering (Data Science)</span>
+                <span class="department-connector">and</span>
+                <span class="department-name">Artificial Intelligence and Data Science (AIDS)</span>
+            </div>
+
+            <h1 class="hero-title">
+                <span id="dynamicHeroTitle" class="hero-brand-pink">COGNOS 2K26</span>
+            </h1>
+            <p class="hero-tagline animate-fade-in-delay">"LET THE DATA SPEAK"</p>
+
+            <!-- Large, Spacious Meta Cards for Date, Venue, and Prize Pool -->
+            <div class="hero-meta-cards">
+                <div class="hero-meta-card date-card animate-slide-up">
+                    <div class="meta-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <div class="meta-card-content">
+                        <div class="meta-card-label">SYMPOSIUM DATE</div>
+                        <div class="meta-card-value">October 9, 2026 (Friday)</div>
+                    </div>
+                </div>
+
+                <div class="hero-meta-card venue-card animate-slide-up" style="animation-delay: 0.15s;">
+                    <div class="meta-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <div class="meta-card-content">
+                        <div class="meta-card-label">CAMPUS VENUE</div>
+                        <div class="meta-card-value">Decennial Block &ndash; III Floor</div>
+                    </div>
+                </div>
+
+                <div class="hero-meta-card prize-card animate-slide-up" style="animation-delay: 0.3s;">
+                    <div class="meta-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
+                    </div>
+                    <div class="meta-card-content">
+                        <div class="meta-card-label">TOTAL PRIZE POOL</div>
+                        <div class="meta-card-value prize-highlight"><span class="rupee">&#8377;</span>18,000 Cash Prizes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-wrap animate-fade-in">
+                <div class="countdown-grid">
+                    <div class="countdown-box">
+                        <div class="countdown-num" id="timer-days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-num" id="timer-hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-num" id="timer-mins">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-num" id="timer-secs">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero CTAs -->
+            <div class="hero-cta-group">
+                <button class="btn-primary-action pulse-btn" onclick="openRegistrationModal()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                    Register Now
+                </button>
+                <a href="#events" class="btn-secondary-action">
+                    Explore 3 Challenges &rarr;
+                </a>
+            </div>
+
+            <!-- Stats Ribbon -->
+            <div class="stats-banner">
+                <div class="stat-col">
+                    <div class="stat-num counter-target" data-target="3">3</div>
+                    <div class="stat-lbl">Technical Challenges</div>
+                </div>
+                <div class="stat-col">
+                    <div class="stat-num"><span class="rupee">&#8377;</span>18,000</div>
+                    <div class="stat-lbl">Cash Prize Pool</div>
+                </div>
+                <div class="stat-col">
+                    <div class="stat-num counter-target" data-target="500">500+</div>
+                    <div class="stat-lbl">Competitors</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. EVENTS SECTION (Generously Spaced & Rich Colored Prizes) -->
+    <section id="events" class="events-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">COMPETITIVE CHALLENGES</span>
+                <h2 class="section-title">Select Your Events</h2>
+                <p class="section-desc">Review the technical criteria, timings, venues, and guidelines below. Participate individually or in teams using our unified registration portal.</p>
+            </div>
+
+            <div class="events-grid">
+                <!-- Event 1: Vishleshana -->
+                <div class="event-card animate-on-scroll">
+                    <div class="card-img-wrap">
+                        <img src="assets/images/banner-vishleshana.svg" alt="Vishleshana Banner" class="event-card-banner">
+                        <span class="card-badge-floating">Event 01</span>
+                    </div>
+                    <div class="event-card-body">
+                        <div>
+                            <div class="event-timing-badge">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>2:00 &ndash; 5:00 PM</span>
+                            </div>
+                            <h3 class="event-card-title">Vishleshana</h3>
+                            <p class="event-card-desc">
+                                A group discussion round evaluating analytical depth, clarity of thought, spontaneous communication, and awareness on contemporary technical and socio-economic topics.
+                            </p>
+
+                            <!-- Loosely Aligned Details with Spacious Layout -->
+                            <div class="event-loose-details">
+                                <div class="detail-item">
+                                    <span class="detail-item-title">Format</span>
+                                    <span class="detail-item-val">Individual Participation</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-item-title">Venue</span>
+                                    <span class="detail-item-val">Panel 1: CM SCE Lab / Panel 2: Dassault Lab</span>
+                                </div>
+
+                                <!-- Multi-Colored Cash Prize Breakdown -->
+                                <div class="prize-breakdown-box">
+                                    <div class="prize-box-header">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
+                                        <span>Cash Prize Pool: <strong>Rs. 6,000</strong></span>
+                                    </div>
+                                    <div class="prize-pill-row">
+                                        <div class="prize-tier gold-tier">
+                                            <span class="tier-label">1st Place</span>
+                                            <span class="tier-amount">Rs. 3,000</span>
+                                        </div>
+                                        <div class="prize-tier silver-tier">
+                                            <span class="tier-label">2nd Place</span>
+                                            <span class="tier-amount">Rs. 2,000</span>
+                                        </div>
+                                        <div class="prize-tier bronze-tier">
+                                            <span class="tier-label">3rd Place</span>
+                                            <span class="tier-amount">Rs. 1,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-card-action" onclick="openEventModal('vishleshana')">
+                            View Rules &amp; Guidelines &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Event 2: Razzle Review -->
+                <div class="event-card animate-on-scroll" style="animation-delay: 0.15s;">
+                    <div class="card-img-wrap">
+                        <img src="assets/images/banner-razzle.svg" alt="Razzle Review Banner" class="event-card-banner">
+                        <span class="card-badge-floating">Event 02</span>
+                    </div>
+                    <div class="event-card-body">
+                        <div>
+                            <div class="event-timing-badge">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>From 11:00 AM onwards</span>
+                            </div>
+                            <h3 class="event-card-title">Razzle Review</h3>
+                            <p class="event-card-desc">
+                                Research paper presentation platform for students to present original technical concepts, novel algorithms, and defended engineering solutions in IEEE format.
+                            </p>
+
+                            <!-- Loosely Aligned Details with Spacious Layout -->
+                            <div class="event-loose-details">
+                                <div class="detail-item">
+                                    <span class="detail-item-title">Format</span>
+                                    <span class="detail-item-val">Max 2 Members per Team</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-item-title">Venue</span>
+                                    <span class="detail-item-val">CM SCE Lab, Decennial Block &ndash; III Floor</span>
+                                </div>
+
+                                <!-- Multi-Colored Cash Prize Breakdown -->
+                                <div class="prize-breakdown-box">
+                                    <div class="prize-box-header">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
+                                        <span>Cash Prize Pool: <strong>Rs. 6,000</strong></span>
+                                    </div>
+                                    <div class="prize-pill-row">
+                                        <div class="prize-tier gold-tier">
+                                            <span class="tier-label">1st Place</span>
+                                            <span class="tier-amount">Rs. 3,000</span>
+                                        </div>
+                                        <div class="prize-tier silver-tier">
+                                            <span class="tier-label">2nd Place</span>
+                                            <span class="tier-amount">Rs. 2,000</span>
+                                        </div>
+                                        <div class="prize-tier bronze-tier">
+                                            <span class="tier-label">3rd Place</span>
+                                            <span class="tier-amount">Rs. 1,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-card-action" onclick="openEventModal('razzle_review')">
+                            View Rules &amp; Guidelines &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Event 3: Data Dazzle -->
+                <div class="event-card animate-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="card-img-wrap">
+                        <img src="assets/images/banner-data-dazzle.svg" alt="Data Dazzle Banner" class="event-card-banner">
+                        <span class="card-badge-floating">Event 03</span>
+                    </div>
+                    <div class="event-card-body">
+                        <div>
+                            <div class="event-timing-badge">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>1:00 &ndash; 3:00 PM</span>
+                            </div>
+                            <h3 class="event-card-title">Data Dazzle</h3>
+                            <p class="event-card-desc">
+                                A data storytelling challenge focused on transforming raw datasets into interactive visual dashboards and extracting actionable business intelligence.
+                            </p>
+
+                            <!-- Loosely Aligned Details with Spacious Layout -->
+                            <div class="event-loose-details">
+                                <div class="detail-item">
+                                    <span class="detail-item-title">Format</span>
+                                    <span class="detail-item-val">2 Members per Team</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-item-title">Venue</span>
+                                    <span class="detail-item-val">Dassault Lab, Decennial Block &ndash; III Floor</span>
+                                </div>
+
+                                <!-- Multi-Colored Cash Prize Breakdown -->
+                                <div class="prize-breakdown-box">
+                                    <div class="prize-box-header">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
+                                        <span>Cash Prize Pool: <strong>Rs. 6,000</strong></span>
+                                    </div>
+                                    <div class="prize-pill-row">
+                                        <div class="prize-tier gold-tier">
+                                            <span class="tier-label">1st Place</span>
+                                            <span class="tier-amount">Rs. 3,000</span>
+                                        </div>
+                                        <div class="prize-tier silver-tier">
+                                            <span class="tier-label">2nd Place</span>
+                                            <span class="tier-amount">Rs. 2,000</span>
+                                        </div>
+                                        <div class="prize-tier bronze-tier">
+                                            <span class="tier-label">3rd Place</span>
+                                            <span class="tier-amount">Rs. 1,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-card-action" onclick="openEventModal('data_dazzle')">
+                            View Rules &amp; Guidelines &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unified Registration Callout -->
+            <div class="reg-callout-box animate-on-scroll">
+                <div class="callout-inner">
+                    <h3>Ready to Participate in COGNOS 2K26?</h3>
+                    <p>Register for any or all 3 events in a single step. All participants receive an official digital confirmation pass with lab allotment via email.</p>
+                    <button class="btn-reg-now-large pulse-btn" onclick="openRegistrationModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                        Register Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SCHEDULE SECTION (Timeline & Cards Layout with Hover Effects - NO TABLE) -->
+    <section id="schedule" class="schedule-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PROGRAM TIMELINE</span>
+                <h2 class="section-title">Schedule for October 9, 2026</h2>
+                <p class="section-desc">Please report to the registration desk at Decennial Block at least 30 minutes before your respective event times.</p>
+            </div>
+
+            <!-- Modern Timeline Container -->
+            <div class="timeline-container">
+                <div class="timeline-spine"></div>
+
+                <!-- Timeline Item 1: Razzle Review -->
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-time-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                11:00 AM Onwards
+                            </span>
+                            <span class="timeline-format-badge">Max 2 Members</span>
+                        </div>
+                        <h3 class="timeline-card-title">Razzle Review</h3>
+                        <p class="timeline-card-sub">Research Paper Presentation (8 mins presentation + 2 mins Q&amp;A defense in IEEE format).</p>
+                        <div class="timeline-card-meta">
+                            <div class="timeline-meta-point">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>CM SCE Lab, Decennial Block &ndash; III Floor</span>
+                            </div>
+                            <div class="timeline-meta-point prize-point">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
+                                <span>Prize Pool: Rs. 6,000 (1st: Rs. 3,000 | 2nd: Rs. 2,000 | 3rd: Rs. 1,000)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2: Data Dazzle -->
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-time-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                1:00 PM &ndash; 3:00 PM
+                            </span>
+                            <span class="timeline-format-badge">2 Members</span>
+                        </div>
+                        <h3 class="timeline-card-title">Data Dazzle</h3>
+                        <p class="timeline-card-sub">Interactive Dashboard &amp; Data Storytelling (10&ndash;15 mins live visualization &amp; analytics defense).</p>
+                        <div class="timeline-card-meta">
+                            <div class="timeline-meta-point">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>Dassault Systemes Lab, Decennial Block &ndash; III Floor</span>
+                            </div>
+                            <div class="timeline-meta-point prize-point">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
+                                <span>Prize Pool: Rs. 6,000 (1st: Rs. 3,000 | 2nd: Rs. 2,000 | 3rd: Rs. 1,000)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3: Vishleshana -->
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-time-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                2:00 PM &ndash; 5:00 PM
+                            </span>
+                            <span class="timeline-format-badge">Individual Participation</span>
+                        </div>
+                        <h3 class="timeline-card-title">Vishleshana</h3>
+                        <p class="timeline-card-sub">Group Discussion Rounds (Topics on the spot | 5 mins prep, 10&ndash;15 mins active discussion).</p>
+                        <div class="timeline-card-meta">
+                            <div class="timeline-meta-point">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>Panel 1: CM SCE Lab / Panel 2: Dassault Lab</span>
+                            </div>
+                            <div class="timeline-meta-point prize-point">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8c-.55 0-1 .45-1 1v1h10v-1c0-.55-.45-1-1-1h-1c-.55 0-1-.45-1-1v-2.34"></path><path d="M6 4h12v7a6 6 0 0 1-12 0V4z"></path></svg>
+                                <span>Prize Pool: Rs. 6,000 (1st: Rs. 3,000 | 2nd: Rs. 2,000 | 3rd: Rs. 1,000)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONTINUOUS AUTO-SCROLLING GALLERY (Renamed: Symposium Moments & Highlights) -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 24px;">
+                <span class="section-tag">EVENT FLASHBACK</span>
+                <h2 class="section-title">Symposium Moments &amp; Highlights</h2>
+                <p class="section-desc">Glimpses of competitive group discussions, research defenses, and student delegations from past editions of COGNOS.</p>
+            </div>
+        </div>
+
+        <div class="auto-gallery-wrapper">
+            <div class="auto-gallery-track" id="autoGalleryTrack">
+                <!-- Set 1 -->
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/cognos_team.jpeg')">
+                    <img src="assets/images/cognos_team.jpeg" alt="COGNOS Organizing Team" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/GD1.jpeg')">
+                    <img src="assets/images/GD1.jpeg" alt="Group Discussion Round" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/RR1.jpeg')">
+                    <img src="assets/images/RR1.jpeg" alt="Paper Presentation Defense" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/GD2.jpeg')">
+                    <img src="assets/images/GD2.jpeg" alt="Discussion Deliberations" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/RR2.jpeg')">
+                    <img src="assets/images/RR2.jpeg" alt="Project Demonstration" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/GD3.jpeg')">
+                    <img src="assets/images/GD3.jpeg" alt="Panel Review" loading="lazy">
+                </div>
+
+                <!-- Set 2 (Duplicates for seamless loop) -->
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/cognos_team.jpeg')">
+                    <img src="assets/images/cognos_team.jpeg" alt="COGNOS Organizing Team" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/GD1.jpeg')">
+                    <img src="assets/images/GD1.jpeg" alt="Group Discussion Round" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/RR1.jpeg')">
+                    <img src="assets/images/RR1.jpeg" alt="Paper Presentation Defense" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/GD2.jpeg')">
+                    <img src="assets/images/GD2.jpeg" alt="Discussion Deliberations" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/RR2.jpeg')">
+                    <img src="assets/images/RR2.jpeg" alt="Project Demonstration" loading="lazy">
+                </div>
+                <div class="gallery-photo-card" onclick="openLightbox('assets/images/GD3.jpeg')">
+                    <img src="assets/images/GD3.jpeg" alt="Panel Review" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. COORDINATORS & HOSPITALITY SECTION -->
+    <section id="coordinators" class="coordinators-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">ORGANIZING COMMITTEE</span>
+                <h2 class="section-title">Event Coordinators</h2>
+                <p class="section-desc">Reach out directly to faculty or student coordinators for queries regarding registrations, event rules, and lab venues.</p>
+            </div>
+
+            <div class="coordinators-grid">
+                <!-- Faculty Coordinators -->
+                <div class="coord-group-card animate-on-scroll">
+                    <h3 class="coord-group-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                        Faculty Coordinators
+                    </h3>
+                    <div class="coord-person">
+                        <span class="coord-name">Dr. Ch. Suneetha</span>
+                        <a href="tel:9704118784" class="coord-phone">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            9704118784
+                        </a>
+                    </div>
+                    <div class="coord-person">
+                        <span class="coord-name">Mr. K. Sai Prasanth</span>
+                        <a href="tel:9030232749" class="coord-phone">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            9030232749
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Student Coordinators (No email/phone for Nandini, no convener tag) -->
+                <div class="coord-group-card animate-on-scroll" style="animation-delay: 0.15s;">
+                    <h3 class="coord-group-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        Student Coordinators
+                    </h3>
+                    <div class="coord-person">
+                        <span class="coord-name">Mr. Uday Chalamala</span>
+                        <a href="tel:9542524508" class="coord-phone">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            9542524508
+                        </a>
+                    </div>
+                    <div class="coord-person">
+                        <span class="coord-name">Ms. A. V. Hema Nandini</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hospitality & Accommodation -->
+            <div id="hospitality" class="hospitality-banner animate-on-scroll">
+                <div class="hosp-info">
+                    <h3>Hospitality &amp; Accommodation Services</h3>
+                    <p>
+                        For participants traveling from other institutions, food and accommodation arrangements are facilitated by the college committee. Please inform the coordinator at least 2 days in advance.
+                    </p>
+                </div>
+                <div class="hosp-contact-badge">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Faculty Coordinator</div>
+                    <div class="hosp-coord-name">Mr. K. Medeswararao</div>
+                    <a href="tel:9885686721" class="hosp-coord-phone">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        9885686721
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER (Cleaned of stay queries) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <div class="footer-brand">COGNOS 2K26</div>
+                    <p>
+                        Department of Computer Science &amp; Design (CSD) and Artificial Intelligence &amp; Data Science (AIDS).
+                        A national-level platform for technical presentations, analytical debates, and data visual analytics.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Events</h4>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="openEventModal('vishleshana')">Vishleshana (GD)</a></li>
+                        <li><a href="javascript:void(0)" onclick="openEventModal('razzle_review')">Razzle Review (Paper)</a></li>
+                        <li><a href="javascript:void(0)" onclick="openEventModal('data_dazzle')">Data Dazzle (Dashboard)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Official Queries</h4>
+                    <ul>
+                        <li>Email: <a href="mailto:cognos.csd@gmail.com">cognos.csd@gmail.com</a></li>
+                        <li>Location: Decennial Block &ndash; III Floor</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 COGNOS. Organized by Department of CSD &amp; AIDS.</p>
+                <p>Date of Symposium: October 9, 2026 (Friday)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================
+         MODALS & INTERACTIVE OVERLAYS
+         ========================================================== -->
+
+    <!-- A. Event Details Modal -->
+    <div id="eventModal" class="modal-overlay" onclick="closeEventModal()">
+        <div id="eventModalContent" class="modal-container" onclick="event.stopPropagation()">
+            <!-- Dynamic Content injected via JS -->
+        </div>
+    </div>
+
+    <!-- B. Unified Registration Modal -->
+    <div id="registrationModal" class="modal-overlay" onclick="closeRegistrationModal()">
+        <div class="modal-container reg-form-wrap" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="modal-badge">REGISTRATION</span>
+                    <h2 class="modal-title">COGNOS 2K26 Entry Form</h2>
+                </div>
+                <button class="modal-close-btn" onclick="closeRegistrationModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="cognosRegForm" enctype="multipart/form-data">
+                    
+                    <!-- 1. Select Events Checkboxes -->
+                    <div class="form-group-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                        1. Which events will you be participating in?
+                    </div>
+
+                    <div class="events-select-box">
+                        <!-- Vishleshana -->
+                        <div class="event-checkbox-card">
+                            <div class="cb-label-side">
+                                <input type="checkbox" name="events[]" value="Vishleshana" id="ev_vishleshana" class="custom-checkbox">
+                                <div>
+                                    <label for="ev_vishleshana" class="cb-title">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                        Vishleshana
+                                    </label>
+                                    <div class="cb-sub">Group Discussion &bull; 2:00 &ndash; 5:00 PM (Individual)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Razzle Review -->
+                        <div class="event-checkbox-card">
+                            <div class="cb-label-side">
+                                <input type="checkbox" name="events[]" value="Razzle Review" id="ev_razzle" class="custom-checkbox">
+                                <div>
+                                    <label for="ev_razzle" class="cb-title">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                        Razzle Review
+                                    </label>
+                                    <div class="cb-sub">Paper Presentation &bull; From 11:00 AM onwards (Max 2 Members)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Dazzle -->
+                        <div class="event-checkbox-card">
+                            <div class="cb-label-side">
+                                <input type="checkbox" name="events[]" value="Data Dazzle" id="ev_data_dazzle" class="custom-checkbox">
+                                <div>
+                                    <label for="ev_data_dazzle" class="cb-title">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                        Data Dazzle
+                                    </label>
+                                    <div class="cb-sub">Data Storytelling &amp; Dashboard &bull; 1:00 &ndash; 3:00 PM (2 Members)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vishleshana-participant-box" id="vishleshanaParticipantBox" hidden>
+                        <div class="vishleshana-participant-title">Are both team members participating in Vishleshana?</div>
+                        <select id="vishleshanaParticipation" name="vishleshana_participation" class="form-input">
+                            <option value="primary_only">Only primary participant</option>
+                            <option value="teammate_only">Only teammate</option>
+                            <option value="both">Both participants separately</option>
+                        </select>
+                        <small>Vishleshana is individual participation. Each selected participant is recorded separately.</small>
+                    </div>
+
+                    <!-- 2. Primary Participant Information -->
+                    <div class="form-group-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        2. Participant Information
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label" for="email">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            Enter your email ID <span class="req">*</span>
+                        </label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="e.g. participant@gmail.com" required>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-field">
+                            <label class="form-label" for="student_name">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                Name of the student (In capital letters) <span class="req">*</span>
+                            </label>
+                            <input type="text" id="student_name" name="student_name" class="form-input uppercase" placeholder="e.g. RAHUL SHARMA" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label" for="roll_no">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                Roll No (Complete roll no.) <span class="req">*</span>
+                            </label>
+                            <input type="text" id="roll_no" name="roll_no" class="form-input uppercase" placeholder="e.g. 22B91A0501" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-field">
+                            <label class="form-label" for="branch">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                Branch <span class="req">*</span>
+                            </label>
+                            <input type="text" id="branch" name="branch" class="form-input" placeholder="e.g. CSD / AIDS / CSE" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label" for="college_name">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                                College Name <span class="req">*</span>
+                            </label>
+                            <input type="text" id="college_name" name="college_name" class="form-input" placeholder="e.g. Engineering College" required>
+                        </div>
+                    </div>
+
+                    <!-- 3. Accommodation Information -->
+                    <div class="form-group-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M3 21h18"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path><path d="M9 7h2"></path><path d="M13 7h2"></path><path d="M9 11h2"></path><path d="M13 11h2"></path><path d="M9 15h6"></path></svg>
+                        3. Accommodation Information
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-field">
+                            <label class="form-label" for="gender">Accommodation Group <span class="req">*</span></label>
+                            <select id="gender" name="gender" class="form-input" required>
+                                <option value="">Select group</option>
+                                <option value="Boys">Boys</option>
+                                <option value="Girls">Girls</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label" for="distance_from_college_km">Distance from College (km) <span class="req">*</span></label>
+                            <input type="number" id="distance_from_college_km" name="distance_from_college_km" class="form-input" min="0" max="9999.99" step="0.01" placeholder="e.g. 125" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-label" for="accommodation_required">Do you require accommodation? <span class="req">*</span></label>
+                        <select id="accommodation_required" name="accommodation_required" class="form-input" required>
+                            <option value="">Select an option</option>
+                            <option value="1">Yes, I require accommodation</option>
+                            <option value="0">No, I do not require accommodation</option>
+                        </select>
+                        <small id="accommodationHelp" style="display:block; margin-top:6px; color:#64748b;">Accommodation requests are accepted only for participants travelling more than 100 km.</small>
+                    </div>
+
+                    <!-- 4. Upload College ID Card -->
+                    <div class="form-field">
+                        <label class="form-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            Upload your College ID Card <span class="req">*</span>
+                        </label>
+                        <input type="file" id="idCardInput" name="id_card" accept=".jpg,.jpeg,.png,.pdf" style="display: none;" required>
+                        
+                        <div class="file-upload-zone" id="fileUploadZone">
+                            <div class="upload-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            </div>
+                            <div class="upload-text">Click or drag &amp; drop your College ID Card</div>
+                            <div class="upload-sub">Supports JPG, PNG, or PDF (Max 5MB)</div>
+                            <div id="fileBadge" class="selected-file-badge" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Teammate Option Toggle -->
+                    <div class="teammate-toggle-wrap">
+                        <div class="toggle-info">
+                            <h4 style="display: flex; align-items: center; gap: 6px;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                Do you have a teammate?
+                            </h4>
+                            <p>Applicable for Razzle Review (Max 2) and Data Dazzle (2 members). Vishleshana is individual only.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="teammateToggle" name="has_teammate" value="1">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Expandable Teammate Details Box -->
+                    <div class="teammate-box" id="teammateBox">
+                        <div style="font-size: 13px; color: #1e3a8a; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                            Teammate Details
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label class="form-label" for="teammate_name">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    Teammate Name (Capital letters) <span class="req">*</span>
+                                </label>
+                                <input type="text" id="teammate_name" name="teammate_name" class="form-input uppercase" placeholder="e.g. PRIYA VERMA">
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label" for="teammate_roll_no">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                    Teammate Roll No <span class="req">*</span>
+                                </label>
+                                <input type="text" id="teammate_roll_no" name="teammate_roll_no" class="form-input uppercase" placeholder="e.g. 22B91A0502">
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="form-label" for="teammate_email">Teammate Email (for certificate) <span class="req">*</span></label>
+                            <input type="email" id="teammate_email" name="teammate_email" class="form-input" placeholder="e.g. teammate@gmail.com">
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label class="form-label" for="teammate_branch">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                    Teammate Branch <span class="req">*</span>
+                                </label>
+                                <input type="text" id="teammate_branch" name="teammate_branch" class="form-input" placeholder="e.g. AIDS">
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label" for="teammate_college">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                                    Teammate College Name <span class="req">*</span>
+                                </label>
+                                <input type="text" id="teammate_college" name="teammate_college" class="form-input" placeholder="e.g. Engineering College">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitRegBtn" class="btn-submit-reg pulse-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-right: 6px;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                        Register Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- C. Success / Confirmation Modal -->
+    <div id="successModal" class="modal-overlay" onclick="closeSuccessModal()">
+        <div class="modal-container success-card" onclick="event.stopPropagation()">
+            <div class="success-icon-wrap">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h2 class="success-title">Registration Confirmed</h2>
+            <p class="success-subtitle">
+                Welcome to <strong>COGNOS 2K26</strong>, <span id="successStudentName" style="color: #1d4ed8; font-weight: 700;"></span>!
+            </p>
+
+            <div class="reg-id-display-card">
+                <div class="reg-id-label">Official Registration ID</div>
+                <div class="reg-id-number" id="successRegCode">COG26-XXXX</div>
+            </div>
+
+            <a href="https://chat.whatsapp.com/invite/cognos2k26" id="whatsappJoinBtn" target="_blank" class="btn-join-whatsapp">
+                Join Official WhatsApp Group
+            </a>
+
+            <div class="email-notice-box">
+                A confirmation pass with challenge venues, timings, and coordinator contacts has been sent to <strong id="successEmail"></strong>. Please check your inbox.
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button class="btn-secondary-action" onclick="closeSuccessModal()">
+                    Close Window
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- D. Gallery Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+        <img id="lightboxImg" class="lightbox-img" src="" alt="Full view">
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/events-data.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/registration.js"></script>
+</body>
+</html>
