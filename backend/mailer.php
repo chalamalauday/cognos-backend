@@ -38,22 +38,22 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
                 "• Time: 2:00 PM – 5:00 PM\n" .
                 "• Venue: Panel 1: CM SCE Lab | Panel 2: Dassault Systemes Lab (Decennial Block, 3rd Floor)\n" .
                 "• Prize Pool: ₹6,000 (1st: ₹3,000 | 2nd: ₹2,000 | 3rd: ₹1,000)\n" .
-                "• Faculty Contacts: Dr. Ganji Ramanjaiah (9848332853) | Dr. Riaz Shaik (9966743943)\n" .
-                "• Student Contacts: Bonamukkala Ajay (7207039202) | Shaik Ayesha Rizwana\n\n";
+                "• Faculty Contacts: Dr. Ganji Ramanjaiah (9848332853) | Mr. A V Krishnarao Padyala (9491016925)\n" .
+                "• Student Contacts: M. Pardha Saradhi (8019998439) | K. Madhu Sudhan (8121160316)\n\n";
         } elseif (strpos($eNameLower, 'razzle') !== false) {
             $challengesText .= "Razzle Review (Paper Presentation)\n" .
                 "• Time: 11:00 AM Onwards\n" .
                 "• Venue: CM SCE Lab (Decennial Block, 3rd Floor)\n" .
                 "• Prize Pool: ₹6,000 (1st: ₹3,000 | 2nd: ₹2,000 | 3rd: ₹1,000)\n" .
-                "• Faculty Contacts: Dr. Ch. Sudha Sree (9494641234) | Dr. Vallabhajosyula Sasikala (7976835016)\n" .
-                "• Student Contacts: Ponnaluri Jeyanth (8331927193) | N Gayatri\n\n";
+                "• Faculty Contacts: Dr. Ch. Sudha Sree (9494641234) | Dr. Subramanyam Kunisetti (9441065060)\n" .
+                "• Student Contacts: Pangala Tarun (9959084678) | Shaik Zaheer (7989863901)\n\n";
         } elseif (strpos($eNameLower, 'data') !== false || strpos($eNameLower, 'dazzle') !== false) {
             $challengesText .= "Data Dazzle (Data Storytelling & Dashboard Presentation)\n" .
                 "• Time: 1:00 PM – 3:00 PM\n" .
                 "• Venue: Dassault Systemes Lab (Decennial Block, 3rd Floor)\n" .
                 "• Prize Pool: ₹6,000 (1st: ₹3,000 | 2nd: ₹2,000 | 3rd: ₹1,000)\n" .
                 "• Faculty Contacts: Dr. R. V. Kishore Kumar (9885993494) | Mr. Rallabandi Ch S N P Sairam (8328505878)\n" .
-                "• Student Contacts: Jarabana Krishna Kanth (7013162268) | Sahitya B.\n\n";
+                "• Student Contacts: Aparna Sahu (9392854512) | Kolla Kesava Chandi Kumar (8247396774)\n\n";
         }
     }
 
@@ -151,7 +151,7 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
         "Data Dazzle Setup: Participants must bring their own laptops with necessary BI / Analytics tools pre-installed.\n\n" .
         "--- KEY CONTACTS ---\n" .
         "• Faculty Coordinators: Dr. Ch. Suneetha (9704118784) | Mr. K. Sai Prasanth (9030232749)\n" .
-        "• Student Coordinators: Mr. Uday Chalamala (9542524508) | Ms. A. V. Hema Nandini\n" .
+        "• Student Coordinators: Mr. Ashok Reddy (994997939) | Ms. Galla Sowmya\n" .
         "• Accommodation & Hospitality: Mr. K. Medeswararao (9885686721)\n\n" .
         "Warm regards,\n" .
         "Organizing Team – COGNOS 2K26\n" .

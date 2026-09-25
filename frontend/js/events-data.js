@@ -34,11 +34,11 @@ const COGNOS_EVENTS_DATA = {
         coordinators: {
             faculty: [
                 { name: "Dr. Ganji Ramanjaiah", phone: "9848332853" },
-                { name: "Dr. Riaz Shaik", phone: "9966743943" }
+                { name: "Mr. A V Krishnarao Padyala", phone: "9491016925" }
             ],
             students: [
-                { name: "Bonamukkala Ajay", phone: "7207039202" },
-                { name: "Shaik Ayesha Rizwana", phone: "7207039202" }
+                { name: "M. Pardha Saradhi (Y23CD114)", phone: "8019998439" },
+                { name: "K. Madhu Sudhan (Y23CD105)", phone: "8121160316" }
             ]
         }
     },
@@ -82,11 +82,11 @@ const COGNOS_EVENTS_DATA = {
         coordinators: {
             faculty: [
                 { name: "Dr. Ch. Sudha Sree", phone: "9494641234" },
-                { name: "Dr. Vallabhajosyula Sasikala", phone: "7976835016" }
+                { name: "Dr. Subramanyam Kunisetti", phone: "9441065060" }
             ],
             students: [
-                { name: "Ponnaluri Jeyanth", phone: "8331927193" },
-                { name: "N Gayatri", phone: "8331927193" }
+                { name: "Pangala Tarun (Y23CD139)", phone: "9959084678" },
+                { name: "Shaik Zaheer (Y25CD154)", phone: "7989863901" }
             ]
         }
     },
@@ -123,8 +123,8 @@ const COGNOS_EVENTS_DATA = {
                 { name: "Mr. Rallabandi Ch S N P Sairam", phone: "8328505878" }
             ],
             students: [
-                { name: "Jarabana Krishna Kanth", phone: "7013162268" },
-                { name: "Sahitya.B", phone: "7013162268" }
+                { name: "Aparna Sahu", phone: "9392854512" },
+                { name: "Kolla Kesava Chandi Kumar", phone: "8247396774" }
             ]
         }
     }

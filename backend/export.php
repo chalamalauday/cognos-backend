@@ -18,6 +18,28 @@ $pdo = get_db_connection();
 $eventFilter = trim($_GET['event'] ?? 'all');
 $accommodationFilter = strtolower(trim($_GET['accommodation'] ?? ''));
 
+function get_full_id_card_url($path) {
+    if (empty($path)) {
+        return 'N/A';
+    }
+    if (preg_match('/^https?:\/\//i', $path)) {
+        return $path;
+    }
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+        || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+    $protocol = $isHttps ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'cognos.rvrjc.me';
+    if (strpos($host, 'cognos.rvrjc.me') !== false) {
+        $protocol = 'https';
+    }
+    $cleanPath = ltrim($path, '/');
+    if (strpos($cleanPath, 'backend/') !== 0) {
+        $cleanPath = 'backend/' . $cleanPath;
+    }
+    return "{$protocol}://{$host}/{$cleanPath}";
+}
+
 // Filename and Query Setup
 $timestamp = date('Ymd_His');
 if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
@@ -149,7 +171,7 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
     ]);
 
     foreach ($rows as $row) {
-        $idCardUrl = !empty($row['id_card_path']) ? (isset($_SERVER['HTTP_HOST']) ? 'http://' . $_SERVER['HTTP_HOST'] . '/' . $row['id_card_path'] : $row['id_card_path']) : 'N/A';
+        $idCardUrl = get_full_id_card_url($row['id_card_path'] ?? '');
         fputcsv($output, [
             $row['reg_code'],
             $row['student_name'],
@@ -242,7 +264,7 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
     ]);
 
     foreach ($rows as $row) {
-        $idCardUrl = !empty($row['id_card_path']) ? (isset($_SERVER['HTTP_HOST']) ? 'http://' . $_SERVER['HTTP_HOST'] . '/' . $row['id_card_path'] : $row['id_card_path']) : 'N/A';
+        $idCardUrl = get_full_id_card_url($row['id_card_path'] ?? '');
         fputcsv($output, [
             $row['id'],
             $row['reg_code'],

@@ -74,8 +74,8 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
             'team_size' => 'Individual',
             'venue' => 'Panel 1: CM SCE Lab / Panel 2: Dassault Systemes Lab, Decennial Block – III Floor',
             'prize_pool' => '₹6,000 (🥇 ₹3,000 | 🥈 ₹2,000 | 🥉 ₹1,000)',
-            'faculty' => 'Dr. Ganji Ramanjaiah (9848332853), Dr. Riaz Shaik (9966743943)',
-            'students' => 'Bonamukkala Ajay (7207039202), Shaik Ayesha Rizwana'
+            'faculty' => 'Dr. Ganji Ramanjaiah (9848332853), Mr. A V Krishnarao Padyala (9491016925)',
+            'students' => 'M. Pardha Saradhi (8019998439), K. Madhu Sudhan (8121160316)'
         ],
         'Razzle Review' => [
             'name' => 'Razzle Review',
@@ -84,8 +84,8 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
             'team_size' => 'Max 2 Members',
             'venue' => 'CM SCE Lab, Decennial Block – III Floor',
             'prize_pool' => '₹6,000 (🥇 ₹3,000 | 🥈 ₹2,000 | 🥉 ₹1,000)',
-            'faculty' => 'Dr. Ch. Sudha Sree (9494641234), Dr. Vallabhajosyula Sasikala (7976835016)',
-            'students' => 'Ponnaluri Jeyanth (8331927193), N Gayatri'
+            'faculty' => 'Dr. Ch. Sudha Sree (9494641234), Dr. Subramanyam Kunisetti (9441065060)',
+            'students' => 'Pangala Tarun (9959084678), Shaik Zaheer (7989863901)'
         ],
         'Data Dazzle' => [
             'name' => 'Data Dazzle',
@@ -95,7 +95,7 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
             'venue' => 'Dassault Systemes Lab, Decennial Block – III Floor',
             'prize_pool' => '₹6,000 (🥇 ₹3,000 | 🥈 ₹2,000 | 🥉 ₹1,000)',
             'faculty' => 'Dr. R. V. Kishore Kumar (9885993494), Mr. Rallabandi Ch S N P Sairam (8328505878)',
-            'students' => 'Jarabana Krishna Kanth (7013162268), Sahitya.B'
+            'students' => 'Aparna Sahu (9392854512), Kolla Kesava Chandi Kumar (8247396774)'
         ]
     ];
 
