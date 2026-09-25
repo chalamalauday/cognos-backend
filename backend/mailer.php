@@ -151,7 +151,7 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
         "Data Dazzle Setup: Participants must bring their own laptops with necessary BI / Analytics tools pre-installed.\n\n" .
         "--- KEY CONTACTS ---\n" .
         "• Faculty Coordinators: Dr. Ch. Suneetha (9704118784) | Mr. K. Sai Prasanth (9030232749)\n" .
-        "• Student Coordinators: Mr. Ashok Reddy (994997939) | Ms. Galla Sowmya\n" .
+        "• Student Coordinators: Mr. Ashok Reddy (+91 93913 60298) | Ms. Galla Sowmya\n" .
         "• Accommodation & Hospitality: Mr. K. Medeswararao (9885686721)\n\n" .
         "Warm regards,\n" .
         "Organizing Team – COGNOS 2K26\n" .
