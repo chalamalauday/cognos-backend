@@ -69,7 +69,7 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
     }
 
     $studentCaps = strtoupper($studentData['student_name']);
-    $waLink = defined('WHATSAPP_COMMUNITY_LINK') ? WHATSAPP_COMMUNITY_LINK : 'https://chat.whatsapp.com/invite/cognos2k26';
+    $waLink = defined('WHATSAPP_COMMUNITY_LINK') && !empty(WHATSAPP_COMMUNITY_LINK) ? WHATSAPP_COMMUNITY_LINK : 'https://chat.whatsapp.com/CARqCec6NQv5UJGncqCVaT';
 
     $safeName = htmlspecialchars($studentData['student_name'], ENT_QUOTES, 'UTF-8');
     $safeCollege = htmlspecialchars($studentData['college_name'], ENT_QUOTES, 'UTF-8');

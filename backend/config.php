@@ -47,7 +47,7 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
     define('FEST_DEPT', 'Department of Computer Science & Design (CSD) & Artificial Intelligence & Data Science (AIDS)');
     define('FEST_DATE_TEXT', 'October 9, 2026 (Friday)');
     define('FEST_DATE_ISO', '2026-10-09T09:00:00');
-    define('WHATSAPP_COMMUNITY_LINK', 'https://chat.whatsapp.com/invite/cognos2k26'); // Update with your actual WhatsApp link
+    define('WHATSAPP_COMMUNITY_LINK', 'https://chat.whatsapp.com/CARqCec6NQv5UJGncqCVaT');
     define('OFFICIAL_EMAIL', 'cognos.csd@gmail.com');
 
     // --------------------------------------------------------------------------
