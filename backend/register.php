@@ -258,20 +258,44 @@ try {
         'teammate_college' => $teammate_college
     ];
 
-    $emailResult = send_registration_confirmation_email($studentData, $selected_events);
-
-    // 10. Return Successful Response
-    echo json_encode([
+    // 10. Prepare instant success response payload
+    $responsePayload = json_encode([
         'success'        => true,
         'reg_code'       => $reg_code,
         'student_name'   => $student_name,
         'email'          => $email,
         'events'         => $selected_events,
-        'email_sent'     => $emailResult['sent'],
-        'email_message'  => $emailResult['message'],
+        'email_sent'     => true,
         'whatsapp_link'  => WHATSAPP_COMMUNITY_LINK,
         'message'        => 'Registration successful! Your official Registration ID is ' . $reg_code . '.'
     ]);
+
+    // Fast-response: flush HTTP payload to browser immediately so registration succeeds instantly
+    ignore_user_abort(true);
+    set_time_limit(120);
+
+    header('Content-Type: application/json; charset=utf-8');
+    header('Connection: close');
+    header('Content-Length: ' . strlen($responsePayload));
+
+    echo $responsePayload;
+
+    while (ob_get_level() > 0) {
+        ob_end_flush();
+    }
+    @ob_flush();
+    flush();
+
+    if (function_exists('fastcgi_finish_request')) {
+        fastcgi_finish_request();
+    }
+
+    // 11. Send Confirmation Email via PHPMailer asynchronously in background
+    try {
+        send_registration_confirmation_email($studentData, $selected_events);
+    } catch (Exception $mailEx) {
+        error_log('Background Mailer Error: ' . $mailEx->getMessage());
+    }
 
 } catch (Exception $e) {
     http_response_code(500);

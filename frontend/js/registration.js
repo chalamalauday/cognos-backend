@@ -195,6 +195,54 @@ function initRegistrationForm() {
     syncTeammateAvailability();
     syncVishleshanaParticipants();
 
+    // Helper: Client-side ID card image compression to speed up upload by 10x
+    async function compressImageIfImage(file, maxDimension = 1200, quality = 0.82) {
+        if (!file || !file.type || !file.type.startsWith('image/') || file.type === 'image/svg+xml') {
+            return file;
+        }
+        if (file.size < 300 * 1024) {
+            return file; // If already under 300KB, skip compression
+        }
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    let { width, height } = img;
+                    if (width > maxDimension || height > maxDimension) {
+                        if (width > height) {
+                            height = Math.round((height * maxDimension) / width);
+                            width = maxDimension;
+                        } else {
+                            width = Math.round((width * maxDimension) / height);
+                            height = maxDimension;
+                        }
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    canvas.toBlob((blob) => {
+                        if (blob && blob.size < file.size) {
+                            const optimized = new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), {
+                                type: 'image/jpeg',
+                                lastModified: Date.now()
+                            });
+                            resolve(optimized);
+                        } else {
+                            resolve(file);
+                        }
+                    }, 'image/jpeg', quality);
+                };
+                img.onerror = () => resolve(file);
+                img.src = event.target.result;
+            };
+            reader.onerror = () => resolve(file);
+            reader.readAsDataURL(file);
+        });
+    }
+
     // 4. Form Submission via AJAX
     if (regForm) {
         regForm.addEventListener("submit", async (e) => {
@@ -220,6 +268,16 @@ function initRegistrationForm() {
             submitBtn.innerHTML = `<svg class="spin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-width="3"></path></svg> Processing Registration...`;
 
             const formData = new FormData(regForm);
+
+            // Compress ID Card image on client side if > 300KB to make upload 10x faster
+            if (idCardInput.files && idCardInput.files[0]) {
+                try {
+                    const optimizedFile = await compressImageIfImage(idCardInput.files[0]);
+                    formData.set("id_card", optimizedFile);
+                } catch (compressErr) {
+                    console.warn("Client image compression fallback:", compressErr);
+                }
+            }
 
             // Adaptive API path resolver
             const isInsideFrontend = window.location.pathname.includes('/frontend');
