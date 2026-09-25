@@ -23,9 +23,14 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
     define('DB_CHARSET', 'utf8mb4');
 
     // --------------------------------------------------------------------------
-    // 2. Gmail SMTP & PHPMailer Configuration
+    // 2. Email Service Configuration (HTTPS Relay & SMTP Fallback)
+    // Note: Render free tier blocks outbound raw SMTP ports (25, 465, 587).
+    // On Render, emails are delivered over HTTPS (port 443) via Google Apps Script Relay or Brevo/Resend API.
     // --------------------------------------------------------------------------
-    // Replace with your actual Gmail and 16-character App Password
+    define('GMAIL_WEBHOOK_URL', getenv('GMAIL_WEBHOOK_URL') ?: ''); // Free Google Apps Script Web App URL
+    define('BREVO_API_KEY', getenv('BREVO_API_KEY') ?: '');         // Optional Brevo REST API Key
+    define('RESEND_API_KEY', getenv('RESEND_API_KEY') ?: '');       // Optional Resend REST API Key
+
     define('SMTP_HOST', 'smtp.gmail.com');
     define('SMTP_PORT', 587);
     define('SMTP_SECURE', 'tls'); // 'tls' or 'ssl'
