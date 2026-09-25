@@ -53,6 +53,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
 }
 
 $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_admin_logged_in'] === true;
+
+$initialStats = [
+    'total_registrations' => 0,
+    'vishleshana' => 0,
+    'razzle_review' => 0,
+    'data_dazzle' => 0,
+    'unique_colleges' => 0,
+    'teams_count' => 0,
+    'boys_accommodation' => 0,
+    'girls_accommodation' => 0
+];
+$initialRegistrations = [];
+
+if ($isLoggedIn) {
+    try {
+        $pdo = get_db_connection();
+
+        // 1. Live stats
+        $totalReg = (int)$pdo->query("SELECT COUNT(*) FROM `registrations`")->fetchColumn();
+        $eventCounts = [];
+        foreach (array_keys($COGNOS_EVENTS) as $ev) {
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM `registration_events` WHERE `event_name` = ?");
+            $stmt->execute([$ev]);
+            $eventCounts[$ev] = (int)$stmt->fetchColumn();
+        }
+        $uniqueColleges = (int)$pdo->query("SELECT COUNT(DISTINCT `college_name`) FROM `registrations`")->fetchColumn();
+        $teammateCount = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `has_teammate` = 1")->fetchColumn();
+        $boysAccommodation = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `accommodation_required` = 1 AND `gender` = 'Boys'")->fetchColumn();
+        $girlsAccommodation = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `accommodation_required` = 1 AND `gender` = 'Girls'")->fetchColumn();
+        $vCount = (int)$pdo->query("SELECT COUNT(*) FROM `registration_participants` WHERE `participates_vishleshana` = 1")->fetchColumn();
+
+        $initialStats = [
+            'total_registrations' => $totalReg,
+            'vishleshana' => $vCount,
+            'razzle_review' => $eventCounts['Razzle Review'] ?? 0,
+            'data_dazzle' => $eventCounts['Data Dazzle'] ?? 0,
+            'unique_colleges' => $uniqueColleges,
+            'teams_count' => $teammateCount,
+            'boys_accommodation' => $boysAccommodation,
+            'girls_accommodation' => $girlsAccommodation
+        ];
+
+        // 2. Live registrations
+        $sql = "
+            SELECT 
+                r.id,
+                r.reg_code,
+                r.student_name,
+                r.roll_no,
+                r.branch,
+                r.college_name,
+                r.gender,
+                r.distance_from_college_km,
+                r.accommodation_required,
+                r.primary_vishleshana,
+                r.teammate_vishleshana,
+                r.email,
+                r.id_card_path,
+                r.has_teammate,
+                r.teammate_name,
+                r.teammate_email,
+                r.teammate_roll_no,
+                r.teammate_branch,
+                r.teammate_college,
+                r.created_at,
+                GROUP_CONCAT(re.event_name ORDER BY re.event_name SEPARATOR ', ') AS events_list
+            FROM `registrations` r
+            LEFT JOIN `registration_events` re ON r.id = re.registration_id
+            GROUP BY r.id
+            ORDER BY r.id DESC
+        ";
+        $initialRegistrations = $pdo->query($sql)->fetchAll();
+    } catch (Exception $e) {
+        // Fallback gracefully
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -656,7 +732,7 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
 
     <!-- 1. Top Header Banner -->
     <div class="top-header-banner">
-        <img src="frontend/assets/images/header_logo.png" alt="R.V.R. &amp; J.C. COLLEGE OF ENGINEERING" class="college-header-logo">
+        <img src="header_logo.png" alt="R.V.R. &amp; J.C. COLLEGE OF ENGINEERING" class="college-header-logo">
     </div>
 
     <!-- 2. Solid Blue Navbar -->
@@ -715,37 +791,37 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
         <section class="stats-grid">
             <div class="stat-card primary">
                 <div class="stat-label">Total Registrations</div>
-                <div class="stat-value" id="stat-total">--</div>
+                <div class="stat-value" id="stat-total"><?php echo (int)($initialStats['total_registrations'] ?? 0); ?></div>
                 <div class="stat-sub">Confirmed candidates</div>
             </div>
             <div class="stat-card v-card">
                 <div class="stat-label">Vishleshana (GD)</div>
-                <div class="stat-value" id="stat-v">--</div>
+                <div class="stat-value" id="stat-v"><?php echo (int)($initialStats['vishleshana'] ?? 0); ?></div>
                 <div class="stat-sub">Oct 9 &bull; 2:00 &ndash; 5:00 PM</div>
             </div>
             <div class="stat-card r-card">
                 <div class="stat-label">Razzle Review (Paper)</div>
-                <div class="stat-value" id="stat-r">--</div>
+                <div class="stat-value" id="stat-r"><?php echo (int)($initialStats['razzle_review'] ?? 0); ?></div>
                 <div class="stat-sub">Oct 9 &bull; 11:00 AM onwards</div>
             </div>
             <div class="stat-card d-card">
                 <div class="stat-label">Data Dazzle (BI Story)</div>
-                <div class="stat-value" id="stat-d">--</div>
+                <div class="stat-value" id="stat-d"><?php echo (int)($initialStats['data_dazzle'] ?? 0); ?></div>
                 <div class="stat-sub">Oct 9 &bull; 1:00 &ndash; 3:00 PM</div>
             </div>
             <div class="stat-card teams">
                 <div class="stat-label">Colleges &amp; Teams</div>
-                <div class="stat-value" id="stat-colleges">--</div>
-                <div class="stat-sub" id="stat-teams-sub">Colleges participating</div>
+                <div class="stat-value" id="stat-colleges"><?php echo (int)($initialStats['unique_colleges'] ?? 0); ?></div>
+                <div class="stat-sub" id="stat-teams-sub"><?php echo (int)($initialStats['teams_count'] ?? 0); ?> team registrations</div>
             </div>
             <div class="stat-card" style="border-left: 4px solid #f97316;">
                 <div class="stat-label">Boys Accommodation</div>
-                <div class="stat-value" id="stat-boys-accommodation">--</div>
+                <div class="stat-value" id="stat-boys-accommodation"><?php echo (int)($initialStats['boys_accommodation'] ?? 0); ?></div>
                 <div class="stat-sub">Requests above 100 km</div>
             </div>
             <div class="stat-card" style="border-left: 4px solid #db2777;">
                 <div class="stat-label">Girls Accommodation</div>
-                <div class="stat-value" id="stat-girls-accommodation">--</div>
+                <div class="stat-value" id="stat-girls-accommodation"><?php echo (int)($initialStats['girls_accommodation'] ?? 0); ?></div>
                 <div class="stat-sub">Requests above 100 km</div>
             </div>
         </section>
@@ -771,12 +847,12 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
                         📊 Export Excel Sheets ▾
                     </button>
                     <div class="dropdown-menu">
-                        <a href="backend/export.php?event=all" target="_blank">📥 Master Sheet (All Registrations)</a>
-                        <a href="backend/export.php?event=Vishleshana" target="_blank">📥 Vishleshana Individual Participants</a>
-                        <a href="backend/export.php?event=Razzle+Review" target="_blank">📥 Razzle Review (Paper) Sheet</a>
-                        <a href="backend/export.php?event=Data+Dazzle" target="_blank">📥 Data Dazzle (BI) Sheet</a>
-                        <a href="backend/export.php?accommodation=boys" target="_blank">📥 Boys Accommodation Sheet</a>
-                        <a href="backend/export.php?accommodation=girls" target="_blank">📥 Girls Accommodation Sheet</a>
+                        <a href="backend/export.php?event=all" target="_blank" class="export-link" data-sub="export.php?event=all">📥 Master Sheet (All Registrations)</a>
+                        <a href="backend/export.php?event=Vishleshana" target="_blank" class="export-link" data-sub="export.php?event=Vishleshana">📥 Vishleshana Individual Participants</a>
+                        <a href="backend/export.php?event=Razzle+Review" target="_blank" class="export-link" data-sub="export.php?event=Razzle+Review">📥 Razzle Review (Paper) Sheet</a>
+                        <a href="backend/export.php?event=Data+Dazzle" target="_blank" class="export-link" data-sub="export.php?event=Data+Dazzle">📥 Data Dazzle (BI) Sheet</a>
+                        <a href="backend/export.php?accommodation=boys" target="_blank" class="export-link" data-sub="export.php?accommodation=boys">📥 Boys Accommodation Sheet</a>
+                        <a href="backend/export.php?accommodation=girls" target="_blank" class="export-link" data-sub="export.php?accommodation=girls">📥 Girls Accommodation Sheet</a>
                     </div>
                 </div>
             </div>
@@ -825,19 +901,42 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
     </div>
 
     <script>
-        let allRegistrations = [];
+        const API_BASE = (function() {
+            const p = window.location.pathname;
+            const base = p.replace(/\/admin\.php.*$/, '');
+            return (base ? base : '') + '/backend';
+        })();
+
+        let allRegistrations = <?php echo json_encode($initialRegistrations, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?: '[]'; ?>;
         let currentFilter = 'all';
         let searchTimer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetchStats();
-            fetchRegistrations();
+            // Update export links to use API_BASE dynamically
+            document.querySelectorAll('.export-link').forEach(link => {
+                const sub = link.getAttribute('data-sub');
+                if (sub) link.href = `${API_BASE}/${sub}`;
+            });
+
+            // Immediately render the preloaded registrations
+            if (Array.isArray(allRegistrations) && allRegistrations.length > 0) {
+                renderRegistrations();
+            } else {
+                fetchRegistrations();
+            }
         });
 
         async function fetchStats() {
             try {
-                const res = await fetch('backend/admin_api.php?action=stats');
-                const data = await res.json();
+                const res = await fetch(`${API_BASE}/admin_api.php?action=stats`);
+                const text = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch(e) {
+                    console.warn('Stats fetch returned non-JSON response:', text.substring(0, 200));
+                    return;
+                }
                 if (data.success) {
                     const stats = data.stats || data;
                     const breakdown = stats.events_breakdown || data.events_breakdown || {};
@@ -859,8 +958,18 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
             try {
                 const search = (document.getElementById('searchInput').value || '').trim();
                 const params = new URLSearchParams({ action: 'list', event: currentFilter, search });
-                const res = await fetch(`backend/admin_api.php?${params.toString()}`);
-                const data = await res.json();
+                const res = await fetch(`${API_BASE}/admin_api.php?${params.toString()}`);
+                const text = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch(e) {
+                    console.warn('Registrations fetch returned non-JSON response:', text.substring(0, 200));
+                    if (!allRegistrations || allRegistrations.length === 0) {
+                        document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#ef4444;">Server communication error. Please refresh the page.</td></tr>`;
+                    }
+                    return;
+                }
                 if (data.success) {
                     allRegistrations = data.registrations || [];
                     renderRegistrations();
@@ -868,7 +977,9 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
                     document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#ef4444;">${data.message || 'Failed to load records'}</td></tr>`;
                 }
             } catch (err) {
-                document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#ef4444;">Connection error while fetching records.</td></tr>`;
+                if (!allRegistrations || allRegistrations.length === 0) {
+                    document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#ef4444;">Connection error while fetching records.</td></tr>`;
+                }
             }
         }
 
@@ -969,7 +1080,7 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
                 // ID Card View
                 let idHtml = '<span style="color:#94a3b8; font-size:11px;">No file</span>';
                 if (row.id_card_path) {
-                    idHtml = `<button class="btn-view-id" onclick="viewIdCard('${row.id_card_path}', '${escapeHtml(row.student_name)}')">View ID Card 📎</button>`;
+                    idHtml = `<button class="btn-view-id" onclick="viewIdCard('${escapeHtml(row.id_card_path)}', '${escapeHtml(row.student_name)}')">View ID Card 📎</button>`;
                 }
 
                 return `
@@ -1010,10 +1121,24 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
             title.innerText = `College ID Card – ${name}`;
             const ext = path.split('.').pop().toLowerCase();
 
+            let fullUrl = path;
+            if (!path.startsWith('http://') && !path.startsWith('https://')) {
+                if (path.startsWith('/')) {
+                    fullUrl = path;
+                } else if (path.startsWith('backend/uploads/')) {
+                    const clean = path.replace(/^backend\//, '');
+                    fullUrl = `${API_BASE}/${clean}`;
+                } else if (path.startsWith('uploads/')) {
+                    fullUrl = `${API_BASE}/${path}`;
+                } else {
+                    fullUrl = `${API_BASE}/${path}`;
+                }
+            }
+
             if (ext === 'pdf') {
-                body.innerHTML = `<iframe src="${path}" style="width:100%; height:70vh; border:none;"></iframe>`;
+                body.innerHTML = `<iframe src="${fullUrl}" style="width:100%; height:70vh; border:none;"></iframe>`;
             } else {
-                body.innerHTML = `<img src="${path}" class="id-preview-frame" alt="ID Card">`;
+                body.innerHTML = `<img src="${fullUrl}" class="id-preview-frame" alt="ID Card">`;
             }
 
             modal.classList.add('active');
@@ -1030,11 +1155,18 @@ $isLoggedIn = isset($_SESSION['cognos_admin_logged_in']) && $_SESSION['cognos_ad
                 const formData = new FormData();
                 formData.append('id', id);
 
-                const res = await fetch('backend/admin_api.php?action=delete', {
+                const res = await fetch(`${API_BASE}/admin_api.php?action=delete`, {
                     method: 'POST',
                     body: formData
                 });
-                const data = await res.json();
+                const text = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch(e) {
+                    alert('Server error while deleting record.');
+                    return;
+                }
                 if (data.success) {
                     allRegistrations = allRegistrations.filter(r => r.id !== id);
                     renderRegistrations();
