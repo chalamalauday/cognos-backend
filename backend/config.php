@@ -38,14 +38,14 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
     define('SMTP_USERNAME', 'cognos.csd@gmail.com');       // Your Gmail address
     define('SMTP_PASSWORD', 'tznnslqimibbmxlf');   // 16-character Gmail App Password
     define('SMTP_FROM_EMAIL', 'cognos.csd@gmail.com');
-    define('SMTP_FROM_NAME', 'COGNOS 2K26 - CSD & AIDS');
+    define('SMTP_FROM_NAME', 'COGNOS 2K26 - CSE(DS) & AI&DS');
 
     // --------------------------------------------------------------------------
     // 3. Fest & Community Details
     // --------------------------------------------------------------------------
     define('FEST_NAME', 'COGNOS 2K26');
     define('FEST_TAGLINE', 'LET THE DATA SPEAK');
-    define('FEST_DEPT', 'Department of Computer Science & Design (CSD) & Artificial Intelligence & Data Science (AIDS)');
+    define('FEST_DEPT', 'Departments of Computer Science Engineering(Data Science) & Artificial Intelligence & Data Science (AI&DS)');
     define('FEST_DATE_TEXT', 'October 9, 2026 (Friday)');
     define('FEST_DATE_ISO', '2026-10-09T09:00:00');
     define('WHATSAPP_COMMUNITY_LINK', 'https://chat.whatsapp.com/CARqCec6NQv5UJGncqCVaT');

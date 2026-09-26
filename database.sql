@@ -1,6 +1,6 @@
 -- ========================================================
 -- COGNOS 2K26 Database Schema
--- Organized by Department of CSD & AIDS
+-- Organized by Departments of Computer Science Engineering(Data Science) & AI&DS
 -- Tagline: "LET THE DATA SPEAK"
 -- ========================================================
 
