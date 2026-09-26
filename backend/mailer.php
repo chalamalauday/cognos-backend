@@ -121,12 +121,12 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
         '<a href="' . $safeWaLink . '" style="display:inline-block;padding:11px 18px;background:#16a34a;color:#ffffff;text-decoration:none;border-radius:6px;font-weight:bold;">Join WhatsApp Group</a></div>' .
         '<h2 style="font-size:20px;color:#0f172a;margin:26px 0 12px;">Important guidelines</h2>' .
         '<p style="line-height:1.8;margin:0;">Carry your original college ID card. Report at least 30 minutes before your event. Bring a laptop with the required BI / analytics tools for Data Dazzle.</p>' .
-        '<p style="line-height:1.7;margin:24px 0 0;">Warm regards,<br><strong>Organizing Team - COGNOS 2K26</strong><br>Departments of Computer Science Engineering(Data Science)<br>and Artificial Intelligence and Data Science (AI&DS)<br>' . OFFICIAL_EMAIL . '</p>' .
+        '<p style="line-height:1.7;margin:24px 0 0;">Warm regards,<br><strong>Organizing Team - COGNOS 2K26</strong><br>Departments of Computer Science and Engineering(Data Science)<br>and Artificial Intelligence and Data Science (AI&DS)<br>' . OFFICIAL_EMAIL . '</p>' .
         '</div><div style="padding:16px 30px;background:#0f172a;color:#cbd5e1;text-align:center;font-size:12px;">COGNOS 2K26 | Let the data speak</div></div></body></html>';
 
     $body = "Dear {$studentCaps},\n\n" .
         "Greetings from the COGNOS 2K26 Organizing Committee!\n\n" .
-        "Thank you for registering for COGNOS 2K26, the National-Level Technical Symposium organized by the Departments of Computer Science Engineering(Data Science) & AI&DS. We are excited to confirm your participation.\n\n" .
+        "Thank you for registering for COGNOS 2K26, the National-Level Technical Symposium organized by the Departments of Computer Science and Engineering(Data Science) & AI&DS. We are excited to confirm your participation.\n\n" .
         "--- REGISTRATION DETAILS ---\n" .
         "• Name: {$studentData['student_name']}\n" .
         "• Registration ID: {$regCode}\n" .
@@ -151,7 +151,7 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
         "• Student Coordinators: Mr. Ashok Reddy (+91 93913 60298) | Ms. Galla Sowmya\n\n" .
         "Warm regards,\n" .
         "Organizing Team – COGNOS 2K26\n" .
-        "Departments of Computer Science Engineering(Data Science) & AI&DS\n" .
+        "Departments of Computer Science and Engineering(Data Science) & AI&DS\n" .
         "Email: " . OFFICIAL_EMAIL . "\n";
 
     // =========================================================================

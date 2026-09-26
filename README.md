@@ -1,6 +1,6 @@
 # 🚀 COGNOS 2K26 - Official Full-Stack Technical Fest Website
 > **"LET THE DATA SPEAK"**  
-> Organized by the **Departments of Computer Science Engineering(Data Science) & Artificial Intelligence & Data Science (AI&DS)**.  
+> Organized by the **Departments of Computer Science and Engineering(Data Science) & Artificial Intelligence & Data Science (AI&DS)**.  
 > **Event Date:** October 9, Friday · Decennial Block – III Floor
 
 ---
