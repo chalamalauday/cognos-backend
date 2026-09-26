@@ -8,6 +8,8 @@ session_start();
 require_once __DIR__ . '/backend/config.php';
 require_once __DIR__ . '/backend/db.php';
 
+$frontendDir = is_dir(__DIR__ . '/cognos') ? 'cognos' : 'frontend';
+
 // Handle Logout
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     unset($_SESSION['cognos_admin_logged_in']);
@@ -136,7 +138,7 @@ if ($isLoggedIn) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo FEST_NAME; ?> - Admin Management Portal</title>
-    <link rel="icon" type="image/svg+xml" href="frontend/assets/images/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="<?php echo $frontendDir; ?>/assets/images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -739,7 +741,7 @@ if ($isLoggedIn) {
     <header class="main-navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <a href="frontend/index.html" style="color: #ffffff; display: flex; align-items: center;" title="View Public Website">
+                <a href="<?php echo $frontendDir; ?>/index.html" style="color: #ffffff; display: flex; align-items: center;" title="View Public Website">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 </a>
                 <span class="nav-brand-title"><?php echo FEST_NAME; ?> Admin Portal</span>
@@ -751,7 +753,7 @@ if ($isLoggedIn) {
                 <span style="font-size: 13px; color: rgba(255,255,255,0.9);">
                     Logged in as <strong><?php echo htmlspecialchars($_SESSION['cognos_admin_user']); ?></strong>
                 </span>
-                <a href="frontend/index.html" class="btn-nav-action" target="_blank">🌐 Live Fest Site</a>
+                <a href="<?php echo $frontendDir; ?>/index.html" class="btn-nav-action" target="_blank">🌐 Live Fest Site</a>
                 <a href="admin.php?action=logout" class="btn-nav-action btn-nav-logout">Logout 🚪</a>
             </div>
             <?php endif; ?>

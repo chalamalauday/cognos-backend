@@ -280,7 +280,7 @@ function initRegistrationForm() {
             }
 
             // Adaptive API path resolver
-            const isInsideFrontend = window.location.pathname.includes('/frontend');
+            const isInsideFrontend = window.location.pathname.includes('/frontend') || window.location.pathname.includes('/cognos');
             const apiUrl = window.COGNOS_API_URL || (window.COGNOS_API_BASE_URL ? `${window.COGNOS_API_BASE_URL}/register.php` : (isInsideFrontend ? '../backend/register.php' : 'backend/register.php'));
 
             try {
