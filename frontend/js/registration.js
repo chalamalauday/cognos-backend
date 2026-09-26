@@ -14,36 +14,8 @@ function initRegistrationForm() {
     const idCardInput = document.getElementById("idCardInput");
     const uploadZone = document.getElementById("fileUploadZone");
     const fileBadge = document.getElementById("fileBadge");
-    const distanceInput = document.getElementById("distance_from_college_km");
-    const accommodationSelect = document.getElementById("accommodation_required");
-    const accommodationHelp = document.getElementById("accommodationHelp");
     const vishleshanaBox = document.getElementById("vishleshanaParticipantBox");
     const vishleshanaParticipation = document.getElementById("vishleshanaParticipation");
-
-    function syncAccommodationEligibility() {
-        if (!distanceInput || !accommodationSelect) return;
-
-        const distance = Number(distanceInput.value);
-        const isEligible = Number.isFinite(distance) && distance > 100;
-        const yesOption = accommodationSelect.querySelector('option[value="1"]');
-        if (yesOption) yesOption.disabled = !isEligible;
-
-        if (!isEligible && accommodationSelect.value === "1") {
-            accommodationSelect.value = "0";
-        }
-
-        if (accommodationHelp) {
-            accommodationHelp.textContent = isEligible
-                ? "You are eligible to request accommodation because your distance is more than 100 km."
-                : "Accommodation requests are accepted only for participants travelling more than 100 km.";
-            accommodationHelp.style.color = isEligible ? "#047857" : "#64748b";
-        }
-    }
-
-    if (distanceInput) {
-        distanceInput.addEventListener("input", syncAccommodationEligibility);
-        syncAccommodationEligibility();
-    }
 
     // 1. Teammate Section Toggle
     if (teammateToggle && teammateBox) {
@@ -318,7 +290,6 @@ function initRegistrationForm() {
                     fileBadge.style.display = "none";
                     teammateBox.classList.remove("active");
                     eventCards.forEach(c => c.classList.remove("selected"));
-                    syncAccommodationEligibility();
                     syncTeammateAvailability();
                     syncVishleshanaParticipants();
                 } else {

@@ -5,6 +5,7 @@
  */
 
 session_start();
+date_default_timezone_set('Asia/Kolkata');
 require_once __DIR__ . '/backend/config.php';
 require_once __DIR__ . '/backend/db.php';
 
@@ -62,9 +63,7 @@ $initialStats = [
     'razzle_review' => 0,
     'data_dazzle' => 0,
     'unique_colleges' => 0,
-    'teams_count' => 0,
-    'boys_accommodation' => 0,
-    'girls_accommodation' => 0
+    'teams_count' => 0
 ];
 $initialRegistrations = [];
 
@@ -82,8 +81,6 @@ if ($isLoggedIn) {
         }
         $uniqueColleges = (int)$pdo->query("SELECT COUNT(DISTINCT `college_name`) FROM `registrations`")->fetchColumn();
         $teammateCount = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `has_teammate` = 1")->fetchColumn();
-        $boysAccommodation = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `accommodation_required` = 1 AND `gender` = 'Boys'")->fetchColumn();
-        $girlsAccommodation = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `accommodation_required` = 1 AND `gender` = 'Girls'")->fetchColumn();
         $vCount = (int)$pdo->query("SELECT COUNT(*) FROM `registration_participants` WHERE `participates_vishleshana` = 1")->fetchColumn();
 
         $initialStats = [
@@ -92,9 +89,7 @@ if ($isLoggedIn) {
             'razzle_review' => $eventCounts['Razzle Review'] ?? 0,
             'data_dazzle' => $eventCounts['Data Dazzle'] ?? 0,
             'unique_colleges' => $uniqueColleges,
-            'teams_count' => $teammateCount,
-            'boys_accommodation' => $boysAccommodation,
-            'girls_accommodation' => $girlsAccommodation
+            'teams_count' => $teammateCount
         ];
 
         // 2. Live registrations
@@ -106,9 +101,6 @@ if ($isLoggedIn) {
                 r.roll_no,
                 r.branch,
                 r.college_name,
-                r.gender,
-                r.distance_from_college_km,
-                r.accommodation_required,
                 r.primary_vishleshana,
                 r.teammate_vishleshana,
                 r.email,
@@ -728,6 +720,160 @@ if ($isLoggedIn) {
             object-fit: contain;
             border-radius: 6px;
         }
+
+        /* ========================================================
+           Mobile Responsive Enhancements for Admin Portal
+           ======================================================== */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 20px 16px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+                gap: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-header-banner {
+                padding: 8px 10px;
+            }
+            .college-header-logo {
+                max-height: 52px;
+            }
+            .main-navbar {
+                padding: 8px 14px;
+            }
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                min-height: auto;
+                padding: 6px 0;
+            }
+            .nav-brand {
+                justify-content: space-between;
+                width: 100%;
+            }
+            .nav-brand-title {
+                font-size: 16px;
+            }
+            .nav-actions {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding-top: 8px;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .btn-nav-action {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            .container {
+                padding: 16px 12px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .stat-card {
+                padding: 14px 12px;
+            }
+            .stat-label {
+                font-size: 11px;
+                letter-spacing: 0.5px;
+            }
+            .stat-value {
+                font-size: 28px;
+            }
+            .stat-sub {
+                font-size: 12px;
+            }
+            .toolbar {
+                padding: 14px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                margin-bottom: 16px;
+            }
+            .filter-tabs {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 6px;
+                gap: 6px;
+            }
+            .filter-btn {
+                flex-shrink: 0;
+                font-size: 13px;
+                padding: 6px 13px;
+                border-radius: 16px;
+            }
+            .tools-right {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .search-box, .search-input {
+                width: 100%;
+            }
+            .search-input {
+                font-size: 14px;
+                padding: 10px 14px 10px 36px;
+            }
+            .export-dropdown, .btn-export {
+                width: 100%;
+            }
+            .btn-export {
+                justify-content: center;
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            .dropdown-menu {
+                width: 100%;
+                left: 0;
+                right: 0;
+            }
+            .table-wrap {
+                border-radius: 8px;
+                -webkit-overflow-scrolling: touch;
+            }
+            table {
+                min-width: 820px;
+                font-size: 13px;
+            }
+            th, td {
+                padding: 10px 12px;
+            }
+            .modal-content-wrap {
+                padding: 14px;
+                margin: 10px;
+                max-width: 95vw;
+            }
+            .id-preview-frame {
+                max-height: 60vh;
+            }
+            .login-card {
+                padding: 24px 18px;
+                margin: 0 10px;
+            }
+            .login-card h2 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .college-header-logo {
+                max-height: 42px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -816,16 +962,6 @@ if ($isLoggedIn) {
                 <div class="stat-value" id="stat-colleges"><?php echo (int)($initialStats['unique_colleges'] ?? 0); ?></div>
                 <div class="stat-sub" id="stat-teams-sub"><?php echo (int)($initialStats['teams_count'] ?? 0); ?> team registrations</div>
             </div>
-            <div class="stat-card" style="border-left: 4px solid #f97316;">
-                <div class="stat-label">Boys Accommodation</div>
-                <div class="stat-value" id="stat-boys-accommodation"><?php echo (int)($initialStats['boys_accommodation'] ?? 0); ?></div>
-                <div class="stat-sub">Requests above 100 km</div>
-            </div>
-            <div class="stat-card" style="border-left: 4px solid #db2777;">
-                <div class="stat-label">Girls Accommodation</div>
-                <div class="stat-value" id="stat-girls-accommodation"><?php echo (int)($initialStats['girls_accommodation'] ?? 0); ?></div>
-                <div class="stat-sub">Requests above 100 km</div>
-            </div>
         </section>
 
         <!-- Toolbar / Filters & Excel Export -->
@@ -853,8 +989,6 @@ if ($isLoggedIn) {
                         <a href="backend/export.php?event=Vishleshana" target="_blank" class="export-link" data-sub="export.php?event=Vishleshana">📥 Vishleshana Individual Participants</a>
                         <a href="backend/export.php?event=Razzle+Review" target="_blank" class="export-link" data-sub="export.php?event=Razzle+Review">📥 Razzle Review (Paper) Sheet</a>
                         <a href="backend/export.php?event=Data+Dazzle" target="_blank" class="export-link" data-sub="export.php?event=Data+Dazzle">📥 Data Dazzle (BI) Sheet</a>
-                        <a href="backend/export.php?accommodation=boys" target="_blank" class="export-link" data-sub="export.php?accommodation=boys">📥 Boys Accommodation Sheet</a>
-                        <a href="backend/export.php?accommodation=girls" target="_blank" class="export-link" data-sub="export.php?accommodation=girls">📥 Girls Accommodation Sheet</a>
                     </div>
                 </div>
             </div>
@@ -869,18 +1003,17 @@ if ($isLoggedIn) {
                         <th>Student Name &amp; Roll No</th>
                         <th>College &amp; Branch</th>
                         <th>Email ID</th>
-                        <th>Accommodation</th>
                         <th>Vishleshana Participants</th>
                         <th>Registered Challenges</th>
                         <th>Teammate Details</th>
                         <th>ID Card</th>
-                        <th>Timestamp</th>
+                        <th>Timestamp (IST)</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="registrationsTbody">
                     <tr>
-                            <td colspan="11" style="text-align: center; padding: 40px; color: #64748b;">
+                        <td colspan="10" style="text-align: center; padding: 40px; color: #64748b;">
                             Loading registrations...
                         </td>
                     </tr>
@@ -948,8 +1081,6 @@ if ($isLoggedIn) {
                     document.getElementById('stat-d').innerText = stats.data_dazzle ?? breakdown['Data Dazzle'] ?? 0;
                     document.getElementById('stat-colleges').innerText = stats.unique_colleges ?? 0;
                     document.getElementById('stat-teams-sub').innerText = (stats.teams_count ?? 0) + ' team registrations';
-                    document.getElementById('stat-boys-accommodation').innerText = stats.boys_accommodation ?? 0;
-                    document.getElementById('stat-girls-accommodation').innerText = stats.girls_accommodation ?? 0;
                 }
             } catch (err) {
                 console.error('Stats fetch error:', err);
@@ -968,7 +1099,7 @@ if ($isLoggedIn) {
                 } catch(e) {
                     console.warn('Registrations fetch returned non-JSON response:', text.substring(0, 200));
                     if (!allRegistrations || allRegistrations.length === 0) {
-                        document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#ef4444;">Server communication error. Please refresh the page.</td></tr>`;
+                        document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="10" style="text-align:center; padding:30px; color:#ef4444;">Server communication error. Please refresh the page.</td></tr>`;
                     }
                     return;
                 }
@@ -976,11 +1107,11 @@ if ($isLoggedIn) {
                     allRegistrations = data.registrations || [];
                     renderRegistrations();
                 } else {
-                    document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#ef4444;">${data.message || 'Failed to load records'}</td></tr>`;
+                    document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="10" style="text-align:center; padding:30px; color:#ef4444;">${data.message || 'Failed to load records'}</td></tr>`;
                 }
             } catch (err) {
                 if (!allRegistrations || allRegistrations.length === 0) {
-                    document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#ef4444;">Connection error while fetching records.</td></tr>`;
+                    document.getElementById('registrationsTbody').innerHTML = `<tr><td colspan="10" style="text-align:center; padding:30px; color:#ef4444;">Connection error while fetching records.</td></tr>`;
                 }
             }
         }
@@ -995,6 +1126,28 @@ if ($isLoggedIn) {
         function handleSearch() {
             window.clearTimeout(searchTimer);
             searchTimer = window.setTimeout(fetchRegistrations, 250);
+        }
+
+        function formatIST(dateStr) {
+            if (!dateStr) return '<span style="color:#94a3b8;">N/A</span>';
+            try {
+                const parts = dateStr.trim().split(/[- :T]/);
+                if (parts.length >= 5) {
+                    const yr = parts[0];
+                    const moIdx = parseInt(parts[1], 10) - 1;
+                    const day = parts[2];
+                    const hr = parseInt(parts[3], 10);
+                    const min = parts[4];
+                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    const ampm = hr >= 12 ? 'PM' : 'AM';
+                    const hr12 = hr % 12 || 12;
+                    const pad = n => String(n).padStart(2, '0');
+                    return `<div style="font-weight:600; color:#0f172a; white-space:nowrap;">${pad(day)} ${months[moIdx]} ${yr}</div><div style="font-size:11px; color:#64748b; white-space:nowrap;">${pad(hr12)}:${pad(min)} ${ampm} IST</div>`;
+                }
+                return `${escapeHtml(dateStr)} <span style="font-size:10.5px; color:#64748b;">IST</span>`;
+            } catch(e) {
+                return escapeHtml(dateStr);
+            }
         }
 
         function renderRegistrations() {
@@ -1018,9 +1171,6 @@ if ($isLoggedIn) {
                         row.college_name,
                         row.branch,
                         row.email,
-                        row.gender,
-                        row.distance_from_college_km,
-                        row.accommodation_required,
                         row.events_list,
                         row.primary_vishleshana ? row.student_name : '',
                         row.teammate_vishleshana ? row.teammate_name : '',
@@ -1036,7 +1186,7 @@ if ($isLoggedIn) {
             });
 
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:40px; color:#64748b;">No registrations found matching the criteria.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding:40px; color:#64748b;">No registrations found matching the criteria.</td></tr>`;
                 return;
             }
 
@@ -1063,10 +1213,6 @@ if ($isLoggedIn) {
                         </div>
                     `;
                 }
-
-                const accommodationHtml = parseInt(row.accommodation_required, 10) === 1
-                    ? `<strong style="color:#047857;">${escapeHtml(row.gender || '')}</strong><div style="font-size:11px; color:#64748b;">${escapeHtml(row.distance_from_college_km || '')} km · Requested</div>`
-                    : `<span style="color:#64748b; font-size:12px;">${escapeHtml(row.gender || 'N/A')}<br>Not requested<br>${escapeHtml(row.distance_from_college_km || 'N/A')} km</span>`;
 
                 const vishleshanaParticipants = [];
                 if (parseInt(row.primary_vishleshana, 10) === 1) {
@@ -1099,13 +1245,12 @@ if ($isLoggedIn) {
                         <td>
                             <a href="mailto:${escapeHtml(row.email)}" style="color:#0b57d0; font-size:12.5px;">${escapeHtml(row.email)}</a>
                         </td>
-                        <td>${accommodationHtml}</td>
                         <td>${vishleshanaHtml}</td>
                         <td>${evPills}</td>
                         <td>${tmHtml}</td>
                         <td>${idHtml}</td>
-                        <td style="font-size:11.5px; color:#64748b; white-space:nowrap;">
-                            ${escapeHtml(row.created_at || '')}
+                        <td style="font-size:12px;">
+                            ${formatIST(row.created_at)}
                         </td>
                         <td>
                             <button class="btn-del" onclick="deleteReg(${row.id}, '${escapeHtml(row.reg_code)}')">Delete</button>

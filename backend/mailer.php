@@ -111,7 +111,7 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
         '<p style="line-height:1.7;margin:0 0 22px;">Greetings from the COGNOS 2K26 Organizing Committee. Your registration is confirmed.</p>' .
         '<div style="padding:18px;background:#eff6ff;border-radius:10px;border-top:4px solid #2563eb;">' .
         '<div style="font-size:12px;letter-spacing:1px;color:#1d4ed8;font-weight:bold;text-transform:uppercase;">Registration details</div>' .
-        '<p style="line-height:1.8;margin:8px 0 0;"><strong>Registration ID:</strong> ' . $safeRegCode . '<br><strong>Roll Number:</strong> ' . $safeRollNo . '<br><strong>College:</strong> ' . $safeCollege . '<br><strong>Accommodation Group:</strong> ' . htmlspecialchars($studentData['gender'] ?? '', ENT_QUOTES, 'UTF-8') . '<br><strong>Distance:</strong> ' . htmlspecialchars((string)($studentData['distance_from_college_km'] ?? ''), ENT_QUOTES, 'UTF-8') . ' km<br><strong>Accommodation:</strong> ' . (!empty($studentData['accommodation_required']) ? 'Requested (subject to availability)' : 'Not requested') . '<br><strong>Primary Vishleshana:</strong> ' . (!empty($studentData['primary_vishleshana']) ? 'Participating' : 'Not participating') . '<br><strong>Teammate Vishleshana:</strong> ' . (!empty($studentData['teammate_vishleshana']) ? 'Participating separately' : 'Not participating') . '<br><strong>Date:</strong> Friday, October 9, 2026</p></div>' .
+        '<p style="line-height:1.8;margin:8px 0 0;"><strong>Registration ID:</strong> ' . $safeRegCode . '<br><strong>Roll Number:</strong> ' . $safeRollNo . '<br><strong>College:</strong> ' . $safeCollege . '<br><strong>Primary Vishleshana:</strong> ' . (!empty($studentData['primary_vishleshana']) ? 'Participating' : 'Not participating') . '<br><strong>Teammate Vishleshana:</strong> ' . (!empty($studentData['teammate_vishleshana']) ? 'Participating separately' : 'Not participating') . '<br><strong>Date:</strong> Friday, October 9, 2026</p></div>' .
         $teammateHtml .
         '<h2 style="font-size:20px;color:#0f172a;margin:26px 0 12px;">Your registered challenges</h2>' .
         $challengesHtml .
@@ -132,9 +132,6 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
         "• Registration ID: {$regCode}\n" .
         "• Roll Number: {$studentData['roll_no']}\n" .
         "• College: {$studentData['college_name']}\n" .
-        "• Accommodation Group: " . ($studentData['gender'] ?? '') . "\n" .
-        "• Distance from College: " . ($studentData['distance_from_college_km'] ?? '') . " km\n" .
-        "• Accommodation: " . (!empty($studentData['accommodation_required']) ? 'Requested (subject to availability)' : 'Not requested') . "\n" .
         "• Primary Vishleshana: " . (!empty($studentData['primary_vishleshana']) ? 'Participating' : 'Not participating') . "\n" .
         "• Teammate Vishleshana: " . (!empty($studentData['teammate_vishleshana']) ? 'Participating separately' : 'Not participating') . "\n" .
         "• Date: Friday, October 9, 2026\n\n" .
@@ -151,8 +148,7 @@ function send_registration_confirmation_email($studentData, $selectedEvents) {
         "Data Dazzle Setup: Participants must bring their own laptops with necessary BI / Analytics tools pre-installed.\n\n" .
         "--- KEY CONTACTS ---\n" .
         "• Faculty Coordinators: Dr. Ch. Suneetha (9704118784) | Mr. K. Sai Prasanth (9030232749)\n" .
-        "• Student Coordinators: Mr. Ashok Reddy (+91 93913 60298) | Ms. Galla Sowmya\n" .
-        "• Accommodation & Hospitality: Mr. K. Medeswararao (9885686721)\n\n" .
+        "• Student Coordinators: Mr. Ashok Reddy (+91 93913 60298) | Ms. Galla Sowmya\n\n" .
         "Warm regards,\n" .
         "Organizing Team – COGNOS 2K26\n" .
         "Department of CSD & AIDS\n" .

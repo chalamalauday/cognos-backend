@@ -31,10 +31,6 @@ try {
     $college_name = trim($_POST['college_name'] ?? '');
     $teammate_email_input = trim($_POST['teammate_email'] ?? '');
     $vishleshana_participation = trim($_POST['vishleshana_participation'] ?? '');
-    $gender       = trim($_POST['gender'] ?? '');
-    $distance_raw = trim($_POST['distance_from_college_km'] ?? '');
-    $distance_from_college_km = filter_var($distance_raw, FILTER_VALIDATE_FLOAT);
-    $accommodation_required = in_array(strtolower(trim($_POST['accommodation_required'] ?? '')), ['1', 'true', 'yes', 'on'], true) ? 1 : 0;
     $primary_vishleshana = 0;
     $teammate_vishleshana = 0;
 
@@ -65,15 +61,6 @@ try {
     }
     if (empty($college_name)) {
         $errors[] = 'College name is required.';
-    }
-    if (!in_array($gender, ['Boys', 'Girls'], true)) {
-        $errors[] = 'Please select Boys or Girls for accommodation grouping.';
-    }
-    if ($distance_raw === '' || $distance_from_college_km === false || $distance_from_college_km < 0) {
-        $errors[] = 'Please enter a valid distance from your college in kilometres.';
-    }
-    if ($accommodation_required && ($distance_from_college_km === false || $distance_from_college_km <= 100)) {
-        $errors[] = 'Accommodation is available only to participants travelling more than 100 km.';
     }
     if (empty($selected_events)) {
         $errors[] = 'Please select at least one event (Vishleshana, Razzle Review, or Data Dazzle).';
@@ -196,32 +183,64 @@ try {
     $reg_code = 'COG26-' . strtoupper(substr(bin2hex(random_bytes(3)), 0, 5));
 
     // 7. Insert Registration Record
-    $insertReg = $pdo->prepare("
-        INSERT INTO `registrations` 
-        (`reg_code`, `email`, `student_name`, `roll_no`, `branch`, `college_name`, `gender`, `distance_from_college_km`, `accommodation_required`, `primary_vishleshana`, `teammate_vishleshana`, `id_card_path`, `has_teammate`, `teammate_name`, `teammate_email`, `teammate_roll_no`, `teammate_branch`, `teammate_college`, `created_at`) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
-    ");
+    // Resilient schema check: handles database before and after accommodation columns are dropped
+    static $hasAccomCol = null;
+    if ($hasAccomCol === null) {
+        try {
+            $colCheck = $pdo->query("SHOW COLUMNS FROM `registrations` LIKE 'accommodation_required'")->fetch();
+            $hasAccomCol = !empty($colCheck);
+        } catch (Exception $e) {
+            $hasAccomCol = false;
+        }
+    }
 
-    $insertReg->execute([
-        $reg_code,
-        $email,
-        $student_name,
-        $roll_no,
-        $branch,
-        $college_name,
-        $gender,
-        $distance_from_college_km,
-        $accommodation_required,
-        $primary_vishleshana,
-        $teammate_vishleshana,
-        $uploaded_id_path,
-        $has_teammate ? 1 : 0,
-        $teammate_name,
-        $teammate_email,
-        $teammate_roll_no,
-        $teammate_branch,
-        $teammate_college
-    ]);
+    if ($hasAccomCol) {
+        $insertReg = $pdo->prepare("
+            INSERT INTO `registrations` 
+            (`reg_code`, `email`, `student_name`, `roll_no`, `branch`, `college_name`, `gender`, `distance_from_college_km`, `accommodation_required`, `primary_vishleshana`, `teammate_vishleshana`, `id_card_path`, `has_teammate`, `teammate_name`, `teammate_email`, `teammate_roll_no`, `teammate_branch`, `teammate_college`, `created_at`) 
+            VALUES (?, ?, ?, ?, ?, ?, NULL, NULL, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ");
+        $insertReg->execute([
+            $reg_code,
+            $email,
+            $student_name,
+            $roll_no,
+            $branch,
+            $college_name,
+            $primary_vishleshana,
+            $teammate_vishleshana,
+            $uploaded_id_path,
+            $has_teammate ? 1 : 0,
+            $teammate_name,
+            $teammate_email,
+            $teammate_roll_no,
+            $teammate_branch,
+            $teammate_college
+        ]);
+    } else {
+        $insertReg = $pdo->prepare("
+            INSERT INTO `registrations` 
+            (`reg_code`, `email`, `student_name`, `roll_no`, `branch`, `college_name`, `primary_vishleshana`, `teammate_vishleshana`, `id_card_path`, `has_teammate`, `teammate_name`, `teammate_email`, `teammate_roll_no`, `teammate_branch`, `teammate_college`, `created_at`) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ");
+        $insertReg->execute([
+            $reg_code,
+            $email,
+            $student_name,
+            $roll_no,
+            $branch,
+            $college_name,
+            $primary_vishleshana,
+            $teammate_vishleshana,
+            $uploaded_id_path,
+            $has_teammate ? 1 : 0,
+            $teammate_name,
+            $teammate_email,
+            $teammate_roll_no,
+            $teammate_branch,
+            $teammate_college
+        ]);
+    }
 
     $reg_id = $pdo->lastInsertId();
 
@@ -245,9 +264,6 @@ try {
         'roll_no'          => $roll_no,
         'branch'           => $branch,
         'college_name'     => $college_name,
-        'gender'           => $gender,
-        'distance_from_college_km' => $distance_from_college_km,
-        'accommodation_required' => $accommodation_required,
         'primary_vishleshana' => $primary_vishleshana,
         'teammate_vishleshana' => $teammate_vishleshana,
         'has_teammate'     => $has_teammate,

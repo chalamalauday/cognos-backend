@@ -16,7 +16,6 @@ if (!isset($_SESSION['cognos_admin_logged_in']) || $_SESSION['cognos_admin_logge
 
 $pdo = get_db_connection();
 $eventFilter = trim($_GET['event'] ?? 'all');
-$accommodationFilter = strtolower(trim($_GET['accommodation'] ?? ''));
 
 function get_full_id_card_url($path) {
     if (empty($path)) {
@@ -40,46 +39,25 @@ function get_full_id_card_url($path) {
     return "{$protocol}://{$host}/{$cleanPath}";
 }
 
-// Filename and Query Setup
+function format_ist_datetime($dtStr) {
+    if (empty($dtStr)) return 'N/A';
+    $ts = strtotime($dtStr);
+    if (!$ts) return $dtStr . ' IST';
+    return date('d M Y, h:i A', $ts) . ' IST';
+}
+
 $timestamp = date('Ymd_His');
-if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
-    $groupName = ucfirst($accommodationFilter);
-    $filename = "COGNOS2K26_{$groupName}_Accommodation_{$timestamp}.csv";
-    $stmt = $pdo->prepare("\n        SELECT r.reg_code, r.student_name, r.roll_no, r.branch, r.college_name, r.email,\n               r.gender, r.distance_from_college_km, r.accommodation_required,\n               r.has_teammate, r.teammate_name, r.teammate_roll_no, r.teammate_branch,\n               r.teammate_college, r.created_at,\n               GROUP_CONCAT(re.event_name ORDER BY re.event_name SEPARATOR ', ') AS registered_events\n        FROM `registrations` r\n        LEFT JOIN `registration_events` re ON r.id = re.registration_id\n        WHERE r.accommodation_required = 1 AND r.gender = ?\n        GROUP BY r.id\n        ORDER BY r.id ASC\n    ");
-    $stmt->execute([$groupName]);
-    $rows = $stmt->fetchAll();
 
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="' . $filename . '"');
-    header('Pragma: no-cache');
-    header('Expires: 0');
-
-    $output = fopen('php://output', 'w');
-    fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
-    fputcsv($output, [
-        'Reg Code', 'Student Name', 'Roll No', 'Branch', 'College Name', 'Email ID',
-        'Accommodation Group', 'Distance (km)', 'Accommodation Requested',
-        'Registered Events', 'Has Teammate', 'Teammate Name', 'Teammate Roll No',
-        'Teammate Branch', 'Teammate College', 'Registration Date & Time'
-    ]);
-
-    foreach ($rows as $row) {
-        fputcsv($output, [
-            $row['reg_code'], $row['student_name'], $row['roll_no'], $row['branch'],
-            $row['college_name'], $row['email'], $row['gender'],
-            $row['distance_from_college_km'], $row['accommodation_required'] ? 'YES' : 'NO',
-            $row['registered_events'] ?? 'None', $row['has_teammate'] ? 'YES' : 'NO',
-            $row['teammate_name'] ?? 'N/A', $row['teammate_roll_no'] ?? 'N/A',
-            $row['teammate_branch'] ?? 'N/A', $row['teammate_college'] ?? 'N/A', $row['created_at']
-        ]);
-    }
-
-    fclose($output);
-    exit;
-
-} elseif ($eventFilter === 'Vishleshana') {
+if ($eventFilter === 'Vishleshana') {
     $filename = "COGNOS2K26_Vishleshana_Individual_Participants_{$timestamp}.csv";
-    $stmt = $pdo->query("\n        SELECT r.reg_code, r.gender, r.distance_from_college_km, r.accommodation_required,\n               p.participant_type, p.participant_name, p.participant_email, p.roll_no, p.branch, p.college_name, p.created_at\n        FROM `registration_participants` p\n        INNER JOIN `registrations` r ON r.id = p.registration_id\n        WHERE p.participates_vishleshana = 1\n        ORDER BY p.id ASC\n    ");
+    $stmt = $pdo->query("
+        SELECT r.reg_code,
+               p.participant_type, p.participant_name, p.participant_email, p.roll_no, p.branch, p.college_name, p.created_at
+        FROM `registration_participants` p
+        INNER JOIN `registrations` r ON r.id = p.registration_id
+        WHERE p.participates_vishleshana = 1
+        ORDER BY p.id ASC
+    ");
     $registrations = $stmt->fetchAll();
 
     header('Content-Type: text/csv; charset=utf-8');
@@ -91,14 +69,13 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
     fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
     fputcsv($output, [
         'Reg Code', 'Participant Type', 'Participant Name', 'Roll No', 'Branch', 'College Name',
-        'Email ID', 'Accommodation Group', 'Distance (km)', 'Accommodation Requested', 'Registration Date & Time'
+        'Email ID', 'Registration Date & Time (IST)'
     ]);
 
     foreach ($registrations as $row) {
         fputcsv($output, [
             $row['reg_code'], ucfirst($row['participant_type']), $row['participant_name'], $row['roll_no'], $row['branch'],
-            $row['college_name'], $row['participant_email'], $row['gender'] ?? 'N/A', $row['distance_from_college_km'] ?? 'N/A',
-            $row['accommodation_required'] ? 'YES' : 'NO', $row['created_at']
+            $row['college_name'], $row['participant_email'], format_ist_datetime($row['created_at'])
         ]);
     }
 
@@ -117,9 +94,6 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
             r.roll_no,
             r.branch,
             r.college_name,
-            r.gender,
-            r.distance_from_college_km,
-            r.accommodation_required,
             r.primary_vishleshana,
             r.teammate_vishleshana,
             r.email,
@@ -138,26 +112,20 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
     $stmt->execute([$eventFilter]);
     $rows = $stmt->fetchAll();
 
-    // Headers
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="' . $filename . '"');
     header('Pragma: no-cache');
     header('Expires: 0');
 
     $output = fopen('php://output', 'w');
-    // Output UTF-8 BOM for Microsoft Excel compatibility
     fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
 
-    // CSV Header row
     fputcsv($output, [
         'Reg Code',
         'Student Name',
         'Roll No',
         'Branch',
         'College Name',
-        'Accommodation Group',
-        'Distance (km)',
-        'Accommodation Requested',
         'Primary Vishleshana',
         'Teammate Vishleshana',
         'Email ID',
@@ -167,7 +135,7 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
         'Teammate Branch',
         'Teammate College',
         'College ID Card URL',
-        'Registration Date & Time'
+        'Registration Date & Time (IST)'
     ]);
 
     foreach ($rows as $row) {
@@ -178,9 +146,6 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
             $row['roll_no'],
             $row['branch'],
             $row['college_name'],
-            $row['gender'] ?? 'N/A',
-            $row['distance_from_college_km'] ?? 'N/A',
-            $row['accommodation_required'] ? 'YES' : 'NO',
             $row['primary_vishleshana'] ? 'YES' : 'NO',
             $row['teammate_vishleshana'] ? 'YES' : 'NO',
             $row['email'],
@@ -190,7 +155,7 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
             $row['teammate_branch'] ?? 'N/A',
             $row['teammate_college'] ?? 'N/A',
             $idCardUrl,
-            $row['created_at']
+            format_ist_datetime($row['created_at'])
         ]);
     }
 
@@ -209,9 +174,6 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
             r.roll_no,
             r.branch,
             r.college_name,
-            r.gender,
-            r.distance_from_college_km,
-            r.accommodation_required,
             r.primary_vishleshana,
             r.teammate_vishleshana,
             r.email,
@@ -236,10 +198,8 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
     header('Expires: 0');
 
     $output = fopen('php://output', 'w');
-    // Output UTF-8 BOM
     fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
 
-    // CSV Header row
     fputcsv($output, [
         'ID',
         'Reg Code',
@@ -247,9 +207,6 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
         'Roll No',
         'Branch',
         'College Name',
-        'Accommodation Group',
-        'Distance (km)',
-        'Accommodation Requested',
         'Primary Vishleshana',
         'Teammate Vishleshana',
         'Email ID',
@@ -260,7 +217,7 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
         'Teammate Branch',
         'Teammate College',
         'College ID Card URL',
-        'Registered At'
+        'Registered At (IST)'
     ]);
 
     foreach ($rows as $row) {
@@ -272,9 +229,6 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
             $row['roll_no'],
             $row['branch'],
             $row['college_name'],
-            $row['gender'] ?? 'N/A',
-            $row['distance_from_college_km'] ?? 'N/A',
-            $row['accommodation_required'] ? 'YES' : 'NO',
             $row['primary_vishleshana'] ? 'YES' : 'NO',
             $row['teammate_vishleshana'] ? 'YES' : 'NO',
             $row['email'],
@@ -285,7 +239,7 @@ if (in_array($accommodationFilter, ['boys', 'girls'], true)) {
             $row['teammate_branch'] ?? 'N/A',
             $row['teammate_college'] ?? 'N/A',
             $idCardUrl,
-            $row['created_at']
+            format_ist_datetime($row['created_at'])
         ]);
     }
 

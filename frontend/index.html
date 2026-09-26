@@ -48,7 +48,6 @@
                     <li><a href="#schedule" class="nav-link">Schedule</a></li>
                     <li><a href="#gallery" class="nav-link">Highlights</a></li>
                     <li><a href="#coordinators" class="nav-link">Coordinators</a></li>
-                    <li><a href="#hospitality" class="nav-link">Accommodation</a></li>
                     <li><button class="btn-nav-register pulse-btn" onclick="openRegistrationModal()">Register Now</button></li>
                 </ul>
             </nav>
@@ -572,24 +571,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Hospitality & Accommodation -->
-            <div id="hospitality" class="hospitality-banner animate-on-scroll">
-                <div class="hosp-info">
-                    <h3>Hospitality &amp; Accommodation Services</h3>
-                    <p>
-                        For participants traveling from other institutions, food and accommodation arrangements are facilitated by the college committee. Please inform the coordinator at least 2 days in advance.
-                    </p>
-                </div>
-                <div class="hosp-contact-badge">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Faculty Coordinator</div>
-                    <div class="hosp-coord-name">Mr. K. Medeswararao</div>
-                    <a href="tel:9885686721" class="hosp-coord-phone">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        9885686721
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -765,39 +746,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. Accommodation Information -->
-                    <div class="form-group-title">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><path d="M3 21h18"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path><path d="M9 7h2"></path><path d="M13 7h2"></path><path d="M9 11h2"></path><path d="M13 11h2"></path><path d="M9 15h6"></path></svg>
-                        3. Accommodation Information
-                    </div>
-
-                    <div class="form-grid-2">
-                        <div class="form-field">
-                            <label class="form-label" for="gender">Accommodation Group <span class="req">*</span></label>
-                            <select id="gender" name="gender" class="form-input" required>
-                                <option value="">Select group</option>
-                                <option value="Boys">Boys</option>
-                                <option value="Girls">Girls</option>
-                            </select>
-                        </div>
-
-                        <div class="form-field">
-                            <label class="form-label" for="distance_from_college_km">Distance from College (km) <span class="req">*</span></label>
-                            <input type="number" id="distance_from_college_km" name="distance_from_college_km" class="form-input" min="0" max="9999.99" step="0.01" placeholder="e.g. 125" required>
-                        </div>
-                    </div>
-
-                    <div class="form-field">
-                        <label class="form-label" for="accommodation_required">Do you require accommodation? <span class="req">*</span></label>
-                        <select id="accommodation_required" name="accommodation_required" class="form-input" required>
-                            <option value="">Select an option</option>
-                            <option value="1">Yes, I require accommodation</option>
-                            <option value="0">No, I do not require accommodation</option>
-                        </select>
-                        <small id="accommodationHelp" style="display:block; margin-top:6px; color:#64748b;">Accommodation requests are accepted only for participants travelling more than 100 km.</small>
-                    </div>
-
-                    <!-- 4. Upload College ID Card -->
+                    <!-- 3. Upload College ID Card -->
                     <div class="form-field">
                         <label class="form-label">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>

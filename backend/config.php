@@ -11,6 +11,7 @@ if (!defined('COGNOS_CONFIG_LOADED')) {
     // Error reporting (set to 0 in production)
     error_reporting(E_ALL);
     ini_set('display_errors', '0');
+    date_default_timezone_set('Asia/Kolkata');
 
     // --------------------------------------------------------------------------
     // 1. Database Configuration (Supports Render Environment Variables with TiDB Cloud)

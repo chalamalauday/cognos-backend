@@ -28,6 +28,7 @@ function get_db_connection() {
 
     try {
         $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+        $pdo->exec("SET time_zone = '+05:30'");
         return $pdo;
     } catch (PDOException $e) {
         // Return JSON error if API context

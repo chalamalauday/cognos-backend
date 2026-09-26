@@ -39,11 +39,6 @@ try {
         // 4. Teams with teammates
         $teammateCount = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `has_teammate` = 1")->fetchColumn();
 
-        // 5. Accommodation requests by group
-        $accommodationCount = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `accommodation_required` = 1")->fetchColumn();
-        $boysAccommodation = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `accommodation_required` = 1 AND `gender` = 'Boys'")->fetchColumn();
-        $girlsAccommodation = (int)$pdo->query("SELECT COUNT(*) FROM `registrations` WHERE `accommodation_required` = 1 AND `gender` = 'Girls'")->fetchColumn();
-
         $vCount = (int)$pdo->query("SELECT COUNT(*) FROM `registration_participants` WHERE `participates_vishleshana` = 1")->fetchColumn();
         $rCount = $eventCounts['Razzle Review'] ?? 0;
         $dCount = $eventCounts['Data Dazzle'] ?? 0;
@@ -55,9 +50,6 @@ try {
             'data_dazzle' => $dCount,
             'unique_colleges' => $uniqueColleges,
             'teams_count' => $teammateCount,
-            'accommodation_count' => $accommodationCount,
-            'boys_accommodation' => $boysAccommodation,
-            'girls_accommodation' => $girlsAccommodation,
             'events_breakdown' => $eventCounts
         ];
 
@@ -70,9 +62,6 @@ try {
             'data_dazzle' => $dCount,
             'unique_colleges' => $uniqueColleges,
             'teams_count' => $teammateCount,
-            'accommodation_count' => $accommodationCount,
-            'boys_accommodation' => $boysAccommodation,
-            'girls_accommodation' => $girlsAccommodation,
             'events_breakdown' => $eventCounts
         ]);
         exit;
@@ -89,9 +78,6 @@ try {
                 r.roll_no,
                 r.branch,
                 r.college_name,
-                r.gender,
-                r.distance_from_college_km,
-                r.accommodation_required,
                 r.primary_vishleshana,
                 r.teammate_vishleshana,
                 r.email,
@@ -117,9 +103,9 @@ try {
         }
 
         if (!empty($search)) {
-            $conditions[] = "(r.student_name LIKE ? OR r.roll_no LIKE ? OR r.college_name LIKE ? OR r.reg_code LIKE ? OR r.email LIKE ? OR r.branch LIKE ? OR r.gender LIKE ? OR r.teammate_name LIKE ? OR r.teammate_email LIKE ? OR r.teammate_roll_no LIKE ? OR CAST(r.distance_from_college_km AS CHAR) LIKE ? OR EXISTS (SELECT 1 FROM `registration_events` search_events WHERE search_events.registration_id = r.id AND search_events.event_name LIKE ?))";
+            $conditions[] = "(r.student_name LIKE ? OR r.roll_no LIKE ? OR r.college_name LIKE ? OR r.reg_code LIKE ? OR r.email LIKE ? OR r.branch LIKE ? OR r.teammate_name LIKE ? OR r.teammate_email LIKE ? OR r.teammate_roll_no LIKE ? OR EXISTS (SELECT 1 FROM `registration_events` search_events WHERE search_events.registration_id = r.id AND search_events.event_name LIKE ?))";
             $term = '%' . $search . '%';
-            $params = array_merge($params, [$term, $term, $term, $term, $term, $term, $term, $term, $term, $term, $term, $term]);
+            $params = array_merge($params, [$term, $term, $term, $term, $term, $term, $term, $term, $term, $term]);
         }
 
         if (!empty($conditions)) {

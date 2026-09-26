@@ -25,9 +25,6 @@ CREATE TABLE `registrations` (
   `roll_no` VARCHAR(60) NOT NULL,
   `branch` VARCHAR(100) NOT NULL,
   `college_name` VARCHAR(255) NOT NULL,
-  `gender` ENUM('Boys', 'Girls') NOT NULL,
-  `distance_from_college_km` DECIMAL(7,2) NOT NULL,
-  `accommodation_required` TINYINT(1) NOT NULL DEFAULT 0,
   `primary_vishleshana` TINYINT(1) NOT NULL DEFAULT 0,
   `teammate_vishleshana` TINYINT(1) NOT NULL DEFAULT 0,
   `id_card_path` VARCHAR(255) DEFAULT NULL,
@@ -40,7 +37,6 @@ CREATE TABLE `registrations` (
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `idx_email` (`email`),
   INDEX `idx_roll_no` (`roll_no`),
-  INDEX `idx_accommodation` (`accommodation_required`, `gender`),
   INDEX `idx_reg_code` (`reg_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
