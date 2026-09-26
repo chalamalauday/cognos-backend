@@ -348,12 +348,40 @@ html, body {
 
     /* Gallery */
     .gallery-section {
-        padding: 46px 0;
+        padding: 44px 0 36px 0;
+    }
+
+    .auto-gallery-wrapper {
+        padding: 6px 0 16px 0;
     }
 
     .gallery-photo-card {
-        flex: 0 0 250px;
-        height: 175px;
+        flex: 0 0 240px;
+        height: 165px;
+        border-radius: 10px;
+    }
+
+    .auto-gallery-track {
+        gap: 14px;
+        animation-duration: 26s;
+    }
+
+    .gallery-swipe-hint {
+        display: flex;
+    }
+
+    .gallery-nav-btn {
+        width: 36px;
+        height: 36px;
+        background: rgba(15, 23, 42, 0.85);
+    }
+
+    .gallery-prev-btn {
+        left: 8px;
+    }
+
+    .gallery-next-btn {
+        right: 8px;
     }
 
     /* Coordinators & Hospitality */
@@ -574,8 +602,32 @@ html, body {
     }
 
     .gallery-photo-card {
-        flex: 0 0 210px;
-        height: 145px;
+        flex: 0 0 200px;
+        height: 140px;
+        border-radius: 8px;
+    }
+
+    .auto-gallery-track {
+        gap: 12px;
+        animation-duration: 22s;
+    }
+
+    .gallery-nav-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .gallery-nav-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .gallery-prev-btn {
+        left: 6px;
+    }
+
+    .gallery-next-btn {
+        right: 6px;
     }
 
     .modal-overlay {

@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initCounters();
     initNavLinksClose();
     initScrollSpy();
+    initInteractiveGallery();
 });
 
 /* ----------------------------------------------------------
@@ -368,7 +369,10 @@ function initScrollSpy() {
 /* ----------------------------------------------------------
    7. Lightbox Modal
    ---------------------------------------------------------- */
+window.__galleryMoved = false;
+
 function openLightbox(src) {
+    if (window.__galleryMoved) return; // Prevent opening during touch swipe
     const modal = document.getElementById("lightboxModal");
     const img = document.getElementById("lightboxImg");
     if (modal && img) {
@@ -395,3 +399,224 @@ document.addEventListener("keydown", (e) => {
         if (typeof closeSuccessModal === "function") closeSuccessModal();
     }
 });
+
+/* ----------------------------------------------------------
+   8. Interactive Mobile & Touch Gallery Controller
+   ---------------------------------------------------------- */
+function initInteractiveGallery() {
+    const wrapper = document.getElementById("autoGalleryWrapper");
+    const track = document.getElementById("autoGalleryTrack");
+    if (!wrapper || !track) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let resumeTimer = null;
+    let isHorizontalSwipe = false;
+
+    // Helper: read current translateX from matrix reliably in all browsers
+    function getTranslateX(el) {
+        const style = window.getComputedStyle(el);
+        const transform = style.transform || style.webkitTransform;
+        if (!transform || transform === "none") return 0;
+
+        if (window.DOMMatrixReadOnly) {
+            try {
+                return new DOMMatrixReadOnly(transform).m41;
+            } catch (err) { /* fallback */ }
+        } else if (window.WebKitCSSMatrix) {
+            try {
+                return new WebKitCSSMatrix(transform).m41;
+            } catch (err) { /* fallback */ }
+        }
+
+        const match = transform.match(/matrix.*\((.+)\)/);
+        if (match) {
+            const values = match[1].split(",");
+            return parseFloat(values[values.length === 6 ? 4 : 12]) || 0;
+        }
+        return 0;
+    }
+
+    function resumeMarquee() {
+        if (isDragging) return;
+        const halfWidth = track.scrollWidth / 2;
+        if (halfWidth <= 0) return;
+
+        let curX = currentTranslate % halfWidth;
+        if (curX > 0) curX -= halfWidth;
+
+        const progress = Math.abs(curX) / halfWidth;
+        const totalDuration = window.innerWidth <= 480 ? 22 : (window.innerWidth <= 768 ? 26 : 32);
+        const delay = progress * totalDuration;
+
+        track.style.transition = "";
+        track.style.transform = "";
+        track.style.animation = `scrollGalleryAuto ${totalDuration}s linear infinite`;
+        track.style.animationDelay = `-${delay}s`;
+        track.style.animationPlayState = "running";
+    }
+
+    // Touch Drag Handling for Mobile Phones & Tablets
+    wrapper.addEventListener("touchstart", (e) => {
+        if (e.touches.length !== 1) return;
+        clearTimeout(resumeTimer);
+        window.__galleryMoved = false;
+        isHorizontalSwipe = false;
+        isDragging = true;
+
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+
+        const curX = getTranslateX(track);
+        track.style.animation = "none";
+        track.style.transition = "";
+        track.style.transform = `translate3d(${curX}px, 0, 0)`;
+        currentTranslate = curX;
+        prevTranslate = curX;
+    }, { passive: true });
+
+    wrapper.addEventListener("touchmove", (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const diffX = currentX - startX;
+        const diffY = currentY - startY;
+
+        // Detect horizontal swipe vs vertical page scrolling
+        if (!isHorizontalSwipe) {
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 6) {
+                isHorizontalSwipe = true;
+                window.__galleryMoved = true;
+            } else if (Math.abs(diffY) > 8) {
+                // User is scrolling the page vertically - release gallery
+                isDragging = false;
+                resumeTimer = setTimeout(resumeMarquee, 1000);
+                return;
+            }
+        }
+
+        if (isHorizontalSwipe) {
+            currentTranslate = prevTranslate + diffX;
+
+            const halfWidth = track.scrollWidth / 2;
+            if (halfWidth > 0) {
+                if (currentTranslate > 0) {
+                    currentTranslate -= halfWidth;
+                    prevTranslate -= halfWidth;
+                } else if (currentTranslate < -halfWidth) {
+                    currentTranslate += halfWidth;
+                    prevTranslate += halfWidth;
+                }
+            }
+
+            track.style.transform = `translate3d(${currentTranslate}px, 0, 0)`;
+        }
+    }, { passive: true });
+
+    wrapper.addEventListener("touchend", () => {
+        if (!isDragging) return;
+        isDragging = false;
+
+        if (window.__galleryMoved) {
+            setTimeout(() => {
+                window.__galleryMoved = false;
+            }, 140);
+        }
+
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(resumeMarquee, 1200);
+    });
+
+    wrapper.addEventListener("touchcancel", () => {
+        isDragging = false;
+        window.__galleryMoved = false;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(resumeMarquee, 1000);
+    });
+
+    // Mouse Drag Handling for Desktop
+    wrapper.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return;
+        clearTimeout(resumeTimer);
+        window.__galleryMoved = false;
+        isDragging = true;
+        startX = e.clientX;
+        wrapper.classList.add("is-dragging");
+
+        const curX = getTranslateX(track);
+        track.style.animation = "none";
+        track.style.transition = "";
+        track.style.transform = `translate3d(${curX}px, 0, 0)`;
+        currentTranslate = curX;
+        prevTranslate = curX;
+    });
+
+    window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const diffX = e.clientX - startX;
+        if (Math.abs(diffX) > 5) {
+            window.__galleryMoved = true;
+        }
+
+        currentTranslate = prevTranslate + diffX;
+        const halfWidth = track.scrollWidth / 2;
+        if (halfWidth > 0) {
+            if (currentTranslate > 0) {
+                currentTranslate -= halfWidth;
+                prevTranslate -= halfWidth;
+            } else if (currentTranslate < -halfWidth) {
+                currentTranslate += halfWidth;
+                prevTranslate += halfWidth;
+            }
+        }
+
+        track.style.transform = `translate3d(${currentTranslate}px, 0, 0)`;
+    });
+
+    window.addEventListener("mouseup", () => {
+        if (!isDragging) return;
+        isDragging = false;
+        wrapper.classList.remove("is-dragging");
+
+        if (window.__galleryMoved) {
+            setTimeout(() => {
+                window.__galleryMoved = false;
+            }, 140);
+        }
+
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(resumeMarquee, 1200);
+    });
+
+    // Prev / Next Navigation Click Handler
+    window.scrollGallery = function(direction) {
+        clearTimeout(resumeTimer);
+        const card = track.querySelector(".gallery-photo-card");
+        const cardWidth = card ? card.offsetWidth : 240;
+        const gap = window.innerWidth <= 480 ? 12 : (window.innerWidth <= 768 ? 14 : 20);
+        const step = (cardWidth + gap) * direction;
+
+        const curX = getTranslateX(track);
+        track.style.animation = "none";
+
+        let newX = curX - step;
+        const halfWidth = track.scrollWidth / 2;
+        if (halfWidth > 0) {
+            if (newX > 0) newX -= halfWidth;
+            else if (newX < -halfWidth) newX += halfWidth;
+        }
+
+        track.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
+        track.style.transform = `translate3d(${newX}px, 0, 0)`;
+        currentTranslate = newX;
+
+        setTimeout(() => {
+            track.style.transition = "";
+            resumeMarquee();
+        }, 500);
+    };
+}

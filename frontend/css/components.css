@@ -761,6 +761,45 @@ input:checked + .slider:before {
     object-fit: contain;
 }
 
+.lightbox-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #ffffff;
+    font-size: 32px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 3010;
+}
+
+.lightbox-close-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.08);
+}
+
+.lightbox-close-btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    .lightbox-close-btn {
+        top: 14px;
+        right: 14px;
+        width: 38px;
+        height: 38px;
+        font-size: 26px;
+    }
+}
+
 /* Spinner Animation */
 .spin-icon {
     animation: spin 1s linear infinite;

@@ -461,10 +461,19 @@
                 <span class="section-tag">EVENT FLASHBACK</span>
                 <h2 class="section-title">Symposium Moments &amp; Highlights</h2>
                 <p class="section-desc">Glimpses of competitive group discussions, research defenses, and student delegations from past editions of COGNOS.</p>
+                <div class="gallery-swipe-hint">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    Swipe to explore &bull; Tap photo to enlarge
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
             </div>
         </div>
 
-        <div class="auto-gallery-wrapper">
+        <div class="auto-gallery-wrapper" id="autoGalleryWrapper">
+            <button type="button" class="gallery-nav-btn gallery-prev-btn" id="galleryPrevBtn" aria-label="Previous photos" onclick="scrollGallery(-1)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+
             <div class="auto-gallery-track" id="autoGalleryTrack">
                 <!-- Set 1 -->
                 <div class="gallery-photo-card" onclick="openLightbox('assets/images/cognos_team.jpeg')">
@@ -506,6 +515,10 @@
                     <img src="assets/images/GD3.jpeg" alt="Panel Review" loading="lazy">
                 </div>
             </div>
+
+            <button type="button" class="gallery-nav-btn gallery-next-btn" id="galleryNextBtn" aria-label="Next photos" onclick="scrollGallery(1)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
         </div>
     </section>
 
@@ -911,7 +924,8 @@
 
     <!-- D. Gallery Lightbox Modal -->
     <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
-        <img id="lightboxImg" class="lightbox-img" src="" alt="Full view">
+        <button type="button" class="lightbox-close-btn" aria-label="Close Lightbox" onclick="closeLightbox()">&times;</button>
+        <img id="lightboxImg" class="lightbox-img" src="" alt="Full view" onclick="event.stopPropagation()">
     </div>
 
     <!-- Scripts -->
